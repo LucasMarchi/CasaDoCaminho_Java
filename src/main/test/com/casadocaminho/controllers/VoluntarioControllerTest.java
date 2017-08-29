@@ -22,9 +22,15 @@ public class VoluntarioControllerTest {
     private MockMvc mockMvc;
 	
 	@Test
-    public void deveRetornarForm() throws Exception {
+    public void deveRetornarTelaFormulario() throws Exception {
         this.mockMvc.perform(get("/voluntario/form")).andDo(print()).andExpect(status().isOk())
                 .andExpect(view().name("/voluntario/form_voluntario"));
+    }
+	
+	@Test
+    public void deveRetornarTelaListagem() throws Exception {
+        this.mockMvc.perform(get("/voluntario")).andDo(print()).andExpect(status().isOk())
+                .andExpect(view().name("/voluntario/lista_voluntarios"));
     }
 
 }

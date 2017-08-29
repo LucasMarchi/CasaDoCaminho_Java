@@ -1,7 +1,5 @@
 package com.casadocaminho.builders;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.casadocaminho.models.Voluntario;
 
 public class VoluntarioBuilder {

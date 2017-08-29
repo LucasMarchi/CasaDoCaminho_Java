@@ -1,0 +1,36 @@
+<div th:fragment="cabecalho">
+	<nav class="navbar navbar-inverse">
+	    <div class="container">
+	        <div class="navbar-header">
+	            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+	                <span class="icon-bar"></span>
+	                <span class="icon-bar"></span>
+	                <span class="icon-bar"></span>
+	            </button>
+	            <a class="navbar-brand" href="#">Home</a>
+	        </div>
+	        <div class="navbar-collapse collapse">
+	            <ul class="nav navbar-nav">
+	                <li th:classappend="${module == 'home' ? 'active' : ''}">
+	                    <a href="#" th:href="@{/voluntario}">Voluntário</a>
+	                </li>
+	                <li th:classappend="${module == 'tasks' ? 'active' : ''}">
+	                    <a href="#" th:href="@{/task}">Tasks</a>
+	                </li>
+	                <li th:classappend="${module == 'tasks-ld' ? 'active' : ''}">
+	                    <a href="#" th:href="@{/task-ld}">Tasks (Layout Dialect)</a>
+	                </li>
+	            </ul>
+	            <ul class="nav navbar-nav navbar-right">
+	                <li th:classappend="${module == 'tasks' ? 'active' : ''}">
+	                    <a href="#" th:href="@{/task}">Tasks</a>
+	                </li>
+	                <li th:classappend="${module == 'tasks-ld' ? 'active' : ''}">
+	                    <a href="#" th:href="@{/task-ld}">Tasks (Layout Dialect)</a>
+	                </li>
+	              
+	            </ul>
+	        </div>
+	    </div>
+	</nav>
+</div>

@@ -1,8 +1,11 @@
 package com.casadocaminho.models;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class Voluntario {
@@ -13,7 +16,15 @@ public class Voluntario {
 	private String nome;
 	private String email;
 	private String telefone;
+	@ManyToMany(mappedBy = "voluntarios")
+	private List<Projeto> projetos;
 	
+	public long getId() {
+		return id;
+	}
+	public void setId(long id) {
+		this.id = id;
+	}
 	public String getNome() {
 		return nome;
 	}
@@ -32,5 +43,12 @@ public class Voluntario {
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
+	public List<Projeto> getProjetos() {
+		return projetos;
+	}
+	public void setProjetos(List<Projeto> projetos) {
+		this.projetos = projetos;
+	}
+	
 	
 }
