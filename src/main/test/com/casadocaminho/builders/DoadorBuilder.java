@@ -19,7 +19,7 @@ public class DoadorBuilder {
 	}
 
 	public DoadorBuilder novoDoadorPadrao() {
-		doador.setNome("Fulano");
+		doador.setNome("DoadorTeste");
 		doador.setEmail("teste@teste.com");
 		doador.setTelefone("(11)4444-5555");
 		return this;
@@ -34,7 +34,7 @@ public class DoadorBuilder {
 		List<Doador> doadores = new ArrayList<>();
 		
 		for(int i=0; i < n; i++) {
-			Doador doadorAux = doador;
+			Doador doadorAux = new DoadorBuilder().novoDoadorPadrao().criar();
 			doadores.add(doadorAux);
 		}
 		

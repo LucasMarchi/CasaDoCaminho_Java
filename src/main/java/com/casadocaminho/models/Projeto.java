@@ -7,7 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class Projeto {
@@ -16,7 +16,7 @@ public class Projeto {
 	@GeneratedValue
 	private long id;
 	private String nome;
-	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.PERSIST)
+	@ManyToMany(fetch=FetchType.EAGER, cascade=CascadeType.PERSIST)
 	private List<Voluntario> voluntarios;
 
 	public long getId() {

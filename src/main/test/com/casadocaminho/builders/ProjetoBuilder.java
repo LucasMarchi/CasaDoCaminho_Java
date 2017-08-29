@@ -1,13 +1,14 @@
 package com.casadocaminho.builders;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.casadocaminho.models.Projeto;
 import com.casadocaminho.models.Voluntario;
+import com.casadocaminho.utils.Constantes;
 
 public class ProjetoBuilder {
 
+	
 	private Projeto projeto = new Projeto();
 
 	public ProjetoBuilder() {}
@@ -19,17 +20,9 @@ public class ProjetoBuilder {
 	}
 
 	public ProjetoBuilder novoProjetoPadrao() {
-		projeto.setNome("ProjetoTeste");
-		projeto.setVoluntarios(criarVoluntarios());
+		projeto.setNome(Constantes.PROJETO_TESTE);
+		projeto.setVoluntarios(new VoluntarioBuilder().novoVoluntarioPadrao().criar(5));
 		return this;
-	}
-
-	private List<Voluntario> criarVoluntarios() {
-		List<Voluntario> voluntarios = new ArrayList<>();
-		for(int i = 0; i < 5; i++) {
-			voluntarios.add(new VoluntarioBuilder().novoVoluntarioPadrao().criar());
-		}
-		return voluntarios;
 	}
 
 	public Projeto criar() {

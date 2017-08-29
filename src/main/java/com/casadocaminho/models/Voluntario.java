@@ -16,7 +16,7 @@ public class Voluntario {
 	private String nome;
 	private String email;
 	private String telefone;
-	@ManyToMany(mappedBy = "voluntarios")
+	@ManyToMany
 	private List<Projeto> projetos;
 	
 	public long getId() {
@@ -49,6 +49,5 @@ public class Voluntario {
 	public void setProjetos(List<Projeto> projetos) {
 		this.projetos = projetos;
 	}
-	
 	
 }

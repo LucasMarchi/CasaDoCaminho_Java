@@ -19,6 +19,8 @@ import com.casadocaminho.models.Doador;
 @AutoConfigureTestDatabase(replace=Replace.NONE)
 public class DoadorRepositoryTest {
 	
+	private static final String NOME_PADRAO = "DoadorTeste";
+	
 	@Autowired
 	private DoadorRepository doadorRepository;
 	
@@ -27,6 +29,14 @@ public class DoadorRepositoryTest {
 		Doador doador = new DoadorBuilder().novoDoadorPadrao().criar();
 		doadorRepository.save(doador);
 		Assert.assertNotNull(doadorRepository.findAll());
+	}
+	
+	@Test
+	public void deveRetornarDoadores() {
+		List<Doador> doadores = new DoadorBuilder().novoDoadorPadrao().criar(10);
+		doadorRepository.save(doadores);
+		List<Doador> doadoresEncontrados = (List<Doador>) doadorRepository.findAll(); 
+		Assert.assertEquals(10, doadoresEncontrados.size());
 	}
 	
 	@Test
@@ -39,10 +49,10 @@ public class DoadorRepositoryTest {
 	
 	@Test
 	public void deveEncontrarDoadoresComMesmoNome() {
-		List<Doador> doadores = new DoadorBuilder().novoDoadorPadrao().criar(5);
+		List<Doador> doadores = new DoadorBuilder().novoDoadorPadrao().criar(2);
 		doadorRepository.save(doadores);
-		List<Doador> doadoresEncontrados = doadorRepository.findByNome(doador.getNome());
-		Assert.assertEquals(doador.getNome(), doadorEncontrado.getNome());
+		List<Doador> doadoresEncontrados = doadorRepository.findByNome(NOME_PADRAO);
+		Assert.assertEquals(2, doadoresEncontrados.size());
 	}
 
 }
