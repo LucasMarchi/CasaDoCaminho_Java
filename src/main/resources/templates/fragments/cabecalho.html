@@ -1,5 +1,5 @@
-<div th:fragment="cabecalho">
-	<nav class="navbar navbar-inverse">
+<header th:fragment="cabecalho">
+	<nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse">
 	    <div class="container">
 	        <div class="navbar-header">
 	            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
@@ -12,7 +12,7 @@
 	        <div class="navbar-collapse collapse">
 	            <ul class="nav navbar-nav">
 	                <li th:classappend="${module == 'home' ? 'active' : ''}">
-	                    <a href="#" th:href="@{/voluntario}">Voluntário</a>
+	                    <a href="#" th:href="@{/voluntario/form}">Voluntário</a>
 	                </li>
 	                <li th:classappend="${module == 'tasks' ? 'active' : ''}">
 	                    <a href="#" th:href="@{/task}">Tasks</a>
@@ -33,4 +33,4 @@
 	        </div>
 	    </div>
 	</nav>
-</div>
+</header>
