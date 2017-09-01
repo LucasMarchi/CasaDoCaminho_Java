@@ -5,7 +5,7 @@
 		<header th:replace="fragments/cabecalho :: cabecalho"></header>
 			<div class="container-fluid">
 			
-			<nav th:replace="fragments/menu_lateral :: menu_lateral"></nav>
+			<nav th:replace="fragments/menu_lateral :: menu_lateral(voluntario)"></nav>
 			
 				<div class="col-md-8">
 					<form action="cadastrar" method="post">
