@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="fragments/head :: head(home)"></head>
+    <body>
+	    <div th:replace="fragments/cabecalho :: cabecalho"></div>
+	    <div class="container">
+	        <div class="jumbotron" align="center" style="margin-top: 50px;">
+	            <h1>Seja bem-vindo a home do TCC</h1>
+	            <div align="center">
+	                <a href="projeto" class="btn btn-lg btn-primary">Clique aqui para ver a lista de convidados</a>
+	            </div>
+	        </div>
+	    </div>
+	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	    <script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+    </body>
+</html>

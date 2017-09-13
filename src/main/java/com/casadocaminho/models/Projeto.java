@@ -1,5 +1,6 @@
 package com.casadocaminho.models;
 
+import java.util.Calendar;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -16,6 +17,8 @@ public class Projeto {
 	@GeneratedValue
 	private long id;
 	private String nome;
+	private Calendar dataInicio;
+	private Calendar dataTermino;
 	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.PERSIST)
 	private List<Voluntario> voluntarios;
 
@@ -33,6 +36,22 @@ public class Projeto {
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+	
+	public Calendar getDataInicio() {
+		return dataInicio;
+	}
+
+	public void setDataInicio(Calendar dataInicio) {
+		this.dataInicio = dataInicio;
+	}
+
+	public Calendar getDataTermino() {
+		return dataTermino;
+	}
+
+	public void setDataTermino(Calendar dataTermino) {
+		this.dataTermino = dataTermino;
 	}
 
 	public List<Voluntario> getVoluntarios() {

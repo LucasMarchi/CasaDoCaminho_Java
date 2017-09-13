@@ -11,11 +11,11 @@
 	        </div>
 	        <div class="navbar-collapse collapse">
 	            <ul class="nav navbar-nav">
-	                <li th:classappend="${module == 'home' ? 'active' : ''}">
-	                    <a href="#" th:href="@{/voluntario/form}">Voluntário</a>
+	            	 <li th:classappend="${module == 'projeto' ? 'active' : ''}">
+	                    <a href="#" th:href="@{/projeto/form}"><span th:text="#{projeto.titulo}"></span></a>
 	                </li>
-	                <li th:classappend="${module == 'tasks' ? 'active' : ''}">
-	                    <a href="#" th:href="@{/task}">Tasks</a>
+	                <li th:classappend="${module == 'voluntario' ? 'active' : ''}">
+	                    <a href="#" th:href="@{/voluntario/form}"><span th:text="#{voluntario.titulo}"></span></a>
 	                </li>
 	                <li th:classappend="${module == 'tasks-ld' ? 'active' : ''}">
 	                    <a href="#" th:href="@{/task-ld}">Tasks (Layout Dialect)</a>

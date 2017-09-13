@@ -24,7 +24,7 @@ public class VoluntarioController {
 	@RequestMapping("/cadastrar")
 	public ModelAndView cadastrar(Voluntario voluntario) {
 		voluntarioRepository.save(voluntario);
-		return new ModelAndView("redirect:/voluntario");
+		return new ModelAndView("redirect:/voluntario/buscar");
 	}
 	
 	@RequestMapping(value="/buscar", method=RequestMethod.GET)
