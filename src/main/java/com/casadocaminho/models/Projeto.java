@@ -1,5 +1,6 @@
 package com.casadocaminho.models;
 
+import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.List;
 
@@ -10,6 +11,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
+
 @Entity
 public class Projeto {
 
@@ -17,8 +21,10 @@ public class Projeto {
 	@GeneratedValue
 	private long id;
 	private String nome;
-	private Calendar dataInicio;
-	private Calendar dataTermino;
+	@DateTimeFormat(iso = ISO.DATE)
+	private LocalDate dataInicio;
+	@DateTimeFormat(iso = ISO.DATE)
+	private LocalDate dataTermino;
 	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.PERSIST)
 	private List<Voluntario> voluntarios;
 
@@ -38,19 +44,19 @@ public class Projeto {
 		this.nome = nome;
 	}
 	
-	public Calendar getDataInicio() {
+	public LocalDate getDataInicio() {
 		return dataInicio;
 	}
 
-	public void setDataInicio(Calendar dataInicio) {
+	public void setDataInicio(LocalDate dataInicio) {
 		this.dataInicio = dataInicio;
 	}
 
-	public Calendar getDataTermino() {
+	public LocalDate getDataTermino() {
 		return dataTermino;
 	}
 
-	public void setDataTermino(Calendar dataTermino) {
+	public void setDataTermino(LocalDate dataTermino) {
 		this.dataTermino = dataTermino;
 	}
 
