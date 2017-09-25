@@ -13,7 +13,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.casadocaminho.builders.ProjetoBuilder;
 import com.casadocaminho.models.Projeto;
-import com.casadocaminho.utils.Constantes;
+import com.casadocaminho.utils.ConstantesTest;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
@@ -42,7 +42,7 @@ public class ProjetoRepositoryTest {
 	public void deveEncontrarProjetoPorNome() {
 		Projeto projeto = new ProjetoBuilder().novoProjetoPadrao().criar();
 		projetoRepository.save(projeto);
-		Projeto projetoEncontrado = projetoRepository.findByNome(Constantes.PROJETO_TESTE).get(0);
+		Projeto projetoEncontrado = projetoRepository.findByNome(ConstantesTest.PROJETO_TESTE).get(0);
 		Assert.assertEquals(projeto.getNome(), projetoEncontrado.getNome());
 	}
 

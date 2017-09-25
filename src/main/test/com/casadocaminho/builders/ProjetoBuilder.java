@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.casadocaminho.models.Projeto;
 import com.casadocaminho.models.Voluntario;
-import com.casadocaminho.utils.Constantes;
+import com.casadocaminho.utils.ConstantesTest;
 
 public class ProjetoBuilder {
 
@@ -21,7 +21,7 @@ public class ProjetoBuilder {
 	}
 
 	public ProjetoBuilder novoProjetoPadrao() {
-		projeto.setNome(Constantes.PROJETO_TESTE);
+		projeto.setNome(ConstantesTest.PROJETO_TESTE);
 		projeto.setVoluntarios(new VoluntarioBuilder().novoVoluntarioPadrao().criar(5));
 		return this;
 	}

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.casadocaminho.models.Voluntario;
-import com.casadocaminho.utils.Constantes;
+import com.casadocaminho.utils.ConstantesTest;
 
 public class VoluntarioBuilder {
 	
@@ -20,7 +20,7 @@ public class VoluntarioBuilder {
 	}
 	
 	public VoluntarioBuilder novoVoluntarioPadrao() {
-		voluntario.setNome(Constantes.VOLUNTARIO_TESTE);
+		voluntario.setNome(ConstantesTest.VOLUNTARIO_TESTE);
 		voluntario.setEmail("teste@teste.com");
 		voluntario.setTelefone("(11)4444-5555");
 		return this;

@@ -3,26 +3,25 @@
 <head th:replace="fragments/head :: head(voluntarios)"></head>
 	<body>
 		<header th:replace="fragments/cabecalho :: cabecalho"></header>
-			<div class="container-fluid">
-			
-			<nav th:replace="fragments/menu_lateral :: menu_lateral(voluntario)"></nav>
-			
-				<div class="col-md-8">
-					<form action="cadastrar" method="post">
-						<div class="form-group">
-							<label for="nome" th:text="#{projeto.nome}"></label> 
-							<input type="text" class="form-control" id="nome" name="nome" placeholder="Nome" />
-						</div>
-						<div class="form-group">
-							<label for="dataInicio" th:text="#{projeto.data.inicio}"></label> 
-							<input type="date" pattern="dd/MM/yyyy" class="form-control" id="dataInicio" name="dataInicio" />
-						</div>
-						<div class="form-group">
-							<label for="dataTermino" th:text="#{projeto.data.termino}"></label> 
-							<input type="date" pattern="dd/MM/yyyy" class="form-control" id="dataTermino" name="dataTermino" />
-						</div>
-						<button type="submit" class="btn btn-success" th:text="#{botao.cadastrar}"></button>
-					</form>
+			<div class="container-fluid" style="margin-top: 70px;">
+				<div class="row">
+					<div class="col-md-offset-2 col-md-6">
+						<form action="cadastrar" method="post">
+							<div class="form-group">
+								<label for="nome" th:text="#{projeto.nome}"></label> 
+								<input type="text" class="form-control" id="nome" name="nome" placeholder="Nome" />
+							</div>
+							<div class="form-group">
+								<label for="dataInicio" th:text="#{projeto.data.inicio}"></label> 
+								<input type="date" pattern="dd/MM/yyyy" class="form-control" id="dataInicio" name="dataInicio" />
+							</div>
+							<div class="form-group">
+								<label for="dataTermino" th:text="#{projeto.data.termino}"></label> 
+								<input type="date" pattern="dd/MM/yyyy" class="form-control" id="dataTermino" name="dataTermino" />
+							</div>
+							<button type="submit" class="btn btn-success" th:text="#{botao.cadastrar}"></button>
+						</form>
+					</div>
 				</div>
 			</div>
 		<footer th:replace="fragments/rodape :: rodape"></footer>

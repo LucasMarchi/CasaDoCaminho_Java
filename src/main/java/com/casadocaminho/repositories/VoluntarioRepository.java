@@ -9,7 +9,7 @@ import com.casadocaminho.models.Voluntario;
 
 public interface VoluntarioRepository extends CrudRepository<Voluntario, Long> {
 
-	List<Voluntario> findByNome(String nome);
+	List<Voluntario> findByNome(String nomeVoluntario);
 
 	@Query("SELECT p.voluntarios FROM Projeto p WHERE p.nome = ?1")
 	List<Voluntario> findByProjetoNome(String nomeProjeto);

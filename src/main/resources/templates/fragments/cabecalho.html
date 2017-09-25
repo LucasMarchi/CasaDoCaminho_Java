@@ -1,36 +1,67 @@
-<header th:fragment="cabecalho">
-	<nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse">
-	    <div class="container">
-	        <div class="navbar-header">
-	            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
-	                <span class="icon-bar"></span>
-	                <span class="icon-bar"></span>
-	                <span class="icon-bar"></span>
-	            </button>
-	            <a class="navbar-brand" href="#">Home</a>
-	        </div>
-	        <div class="navbar-collapse collapse">
-	            <ul class="nav navbar-nav">
-	            	 <li th:classappend="${module == 'projeto' ? 'active' : ''}">
-	                    <a href="#" th:href="@{/projeto/form}"><span th:text="#{projeto.titulo}"></span></a>
-	                </li>
-	                <li th:classappend="${module == 'voluntario' ? 'active' : ''}">
-	                    <a href="#" th:href="@{/voluntario/form}"><span th:text="#{voluntario.titulo}"></span></a>
-	                </li>
-	                <li th:classappend="${module == 'tasks-ld' ? 'active' : ''}">
-	                    <a href="#" th:href="@{/task-ld}">Tasks (Layout Dialect)</a>
-	                </li>
-	            </ul>
-	            <ul class="nav navbar-nav navbar-right">
-	                <li th:classappend="${module == 'tasks' ? 'active' : ''}">
-	                    <a href="#" th:href="@{/task}">Tasks</a>
-	                </li>
-	                <li th:classappend="${module == 'tasks-ld' ? 'active' : ''}">
-	                    <a href="#" th:href="@{/task-ld}">Tasks (Layout Dialect)</a>
-	                </li>
-	              
-	            </ul>
-	        </div>
-	    </div>
-	</nav>
-</header>
+<nav th:fragment="cabecalho">
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+	
+			<div class="container">
+			
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed"
+						data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+						aria-controls="navbar">
+						<span class="sr-only">Toggle navigation</span> <span
+							class="icon-bar"></span> <span class="icon-bar"></span> <span
+							class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="cadastro_voluntario.xhtml"><span
+						class="glyphicon glyphicon-education"></span>Projeto</a>
+				</div>
+				
+				<div id="navbar" class="collapse navbar-collapse">
+					<ul class="nav navbar-nav">
+					
+						<!-- Cadastrar -->
+						
+						<li class="dropdown"><a class="dropdown-toggle"
+							data-toggle="dropdown" href="#">Cadastrar <span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li><a th:href="@{/projeto/form}"><span th:text="#{projeto.titulo}"></span></a></li>
+								<li><a th:href="@{/voluntario/form}"><span th:text="#{voluntario.titulo}"></span></a></li>
+							</ul>
+						</li>
+						
+						<!-- Editar -->
+						
+						<li class="dropdown"><a class="dropdown-toggle"
+							data-toggle="dropdown" href="#">Editar <span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li><a href="atualiza_voluntario.xhtml">Voluntários</a></li>
+								<li><a href="atualiza_projeto.xhtml">Projetos</a></li>
+							</ul>
+						</li>	
+						
+						<!-- Remover -->
+						
+						<li class="dropdown"><a class="dropdown-toggle"
+							data-toggle="dropdown" href="#">Remover <span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li><a href="remove_voluntario.xhtml">Voluntários</a></li>
+								<li><a href="remove_projeto.xhtml">Projetos</a></li>
+							</ul>
+						</li>
+						
+						<!-- Pesquisar -->	
+						<li class="dropdown">
+							<a class="dropdown-toggle" data-toggle="dropdown" href="#">Pesquisar 
+								<span class="glyphicon glyphicon-search"></span>
+								<span class="caret"></span>
+							</a>
+							<ul class="dropdown-menu">
+								<li><a th:href="@{/projeto/listar}"><span th:text="#{projeto.titulo}"></span></a></li>
+								<li><a th:href="@{/voluntario/listar}"><span th:text="#{voluntario.titulo}"></span></a></li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+		<!-- fim cabecalho -->
+</nav>

@@ -1,26 +1,48 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>ListaVIP</title>
-    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" />
-</head>
-<body>
-<div class="container">
-<div id="listaDeProjetos">
-    <table class="table table-hover">
-        <thead>
-        <tr>
-            <th>Nome</th>
-        </tr>
-        </thead>
-        <tr th:each="projeto : ${projetos}">
-            <td> <span th:text="${projeto.nome}"></span> </td>
-        </tr>
-    </table>
-</div>
-</div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script src="bootstrap/js/bootstrap.min.js"></script>
-</body>
+<head th:replace="fragments/head :: head(projetos)"></head>
+	<body>
+		<header th:replace="fragments/cabecalho :: cabecalho"></header>
+		<div class="container-fluid" style="margin-top: 70px;">
+			<div class="row">
+			
+				<div class="col-md-offset-2 col-md-6">
+					<form class="form-inline" action="listarPorFiltro" method="get" >
+						<div class="form-group">
+							<input type="text" class="form-control" id="filtro" name="filtro" placeholder="Filtro" />
+							<button type="submit" class="btn btn-success" th:text="#{botao.buscar}"></button>
+							
+							<label class="radio-inline"><input type="radio" name="tipoFiltro" value="1" th:text="#{filtro.nome}" checked="checked"/></label>
+						</div>
+					</form>
+				</div>
+				
+				<br></br><br></br><br></br>
+				
+				<div class="col-md-offset-2 col-md-6">
+				    <table class="table table-hover">
+				        <thead>
+				        <tr>
+				            <th>Nome</th>
+				            <th>Data Início</th>
+				            <th>Data Término</th>
+				            <th></th>
+				            <th></th>
+				            <th></th>
+				        </tr>
+				        </thead>
+				        <tr th:each="projeto : ${projetos}">
+				            <td><span th:text="${projeto.nome}"></span></td>
+				            <td><span th:text="${projeto.dataInicio}"></span></td>
+				            <td><span th:text="${projeto.dataTermino}"></span></td>
+				            <td><button type="submit" class="btn btn-primary" th:text="#{botao.voluntarios}"></button></td>
+				            <td><button type="submit" class="btn btn-success" th:text="#{botao.editar}"></button></td>
+				            <td><button type="submit" class="btn btn-danger" th:text="#{botao.remover}"></button></td>
+				        </tr>
+				    </table>
+				</div>
+			</div>
+		</div>
+		<footer th:replace="fragments/rodape :: rodape"></footer>
+	</body>
 </html>
