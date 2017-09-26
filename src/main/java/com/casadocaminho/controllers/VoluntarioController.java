@@ -23,8 +23,8 @@ public class VoluntarioController {
 	private VoluntarioRepository voluntarioRepository;
 	
 	@RequestMapping("/form")
-	public String form() {
-		return "voluntario/form_voluntario";
+	public ModelAndView form() {
+		return new ModelAndView("voluntario/form_voluntario");
 	}
 	
 	@RequestMapping("/cadastrar")

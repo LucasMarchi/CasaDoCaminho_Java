@@ -23,21 +23,21 @@ public class ProjetoController {
 	private ProjetoRepository projetoRepository;
 	
 	@RequestMapping("/form")
-	public String form() {
+	public ModelAndView form() {
 		logger.info("Retornando form_projeto");
-		return "/projeto/form_projeto";
+		return new ModelAndView("projeto/form_projeto");
 	}
 	
 	@RequestMapping("/cadastrar")
 	public ModelAndView cadastrar(Projeto projeto) {
 		logger.info("Cadastrando projeto");
 		projetoRepository.save(projeto);
-		return new ModelAndView("redirect:/projeto/listar");
+		return new ModelAndView("redirect:projeto/listar");
 	}
 	
 	@RequestMapping(value="/listar", method=RequestMethod.GET)
 	public ModelAndView listar() {
-		ModelAndView mv = new ModelAndView("/projeto/lista_projetos");
+		ModelAndView mv = new ModelAndView("projeto/lista_projetos");
 		mv.addObject("projetos", projetoRepository.findAll());
 		logger.info("Retornando lista_projetos");
 		return mv;
@@ -45,7 +45,7 @@ public class ProjetoController {
 	
 	@RequestMapping(value="/listarPorFiltro", method=RequestMethod.GET)
 	public ModelAndView listarPorFiltro(@RequestParam String filtro, @RequestParam Integer tipoFiltro) {
-		ModelAndView mv = new ModelAndView("/projeto/lista_projetos");
+		ModelAndView mv = new ModelAndView("projeto/lista_projetos");
 		
 		if(tipoFiltro.equals(Filtro.NOME.getValor())) {
 			mv.addObject("projetos", projetoRepository.findByNome(filtro));
