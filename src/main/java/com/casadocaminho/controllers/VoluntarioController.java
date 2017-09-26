@@ -24,18 +24,18 @@ public class VoluntarioController {
 	
 	@RequestMapping("/form")
 	public String form() {
-		return "/voluntario/form_voluntario";
+		return "voluntario/form_voluntario";
 	}
 	
 	@RequestMapping("/cadastrar")
 	public ModelAndView cadastrar(Voluntario voluntario) {
 		voluntarioRepository.save(voluntario);
-		return new ModelAndView("redirect:/voluntario/buscar");
+		return new ModelAndView("redirect:voluntario/buscar");
 	}
 	
 	@RequestMapping(value="/listar", method=RequestMethod.GET)
 	public ModelAndView listar() {
-		ModelAndView mv = new ModelAndView("/voluntario/lista_voluntarios");
+		ModelAndView mv = new ModelAndView("voluntario/lista_voluntarios");
 		mv.addObject("voluntarios", voluntarioRepository.findAll());
 		logger.info("Retornando lista_voluntarios por filtro");
 		return mv;
@@ -43,7 +43,7 @@ public class VoluntarioController {
 	
 	@RequestMapping(value="/listarPorFiltro", method=RequestMethod.GET)
 	public ModelAndView listarPorFiltro(@RequestParam String filtro, @RequestParam Integer tipoFiltro) {
-		ModelAndView mv = new ModelAndView("/voluntario/lista_voluntarios");
+		ModelAndView mv = new ModelAndView("voluntario/lista_voluntarios");
 		
 		if(tipoFiltro.equals(Filtro.NOME.getValor())) {
 			mv.addObject("voluntarios", voluntarioRepository.findByNome(filtro));
