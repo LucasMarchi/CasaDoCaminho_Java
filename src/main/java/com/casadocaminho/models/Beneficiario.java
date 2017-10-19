@@ -9,7 +9,7 @@ public class Beneficiario {
 	
 	@Id
 	@GeneratedValue
-	private long id;
+	private Integer id;
 	private String nome;
 
 }

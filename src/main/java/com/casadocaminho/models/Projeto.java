@@ -1,7 +1,6 @@
 package com.casadocaminho.models;
 
 import java.time.LocalDate;
-import java.util.Calendar;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -19,20 +18,20 @@ public class Projeto {
 
 	@Id
 	@GeneratedValue
-	private long id;
+	private Integer id;
 	private String nome;
 	@DateTimeFormat(iso = ISO.DATE)
 	private LocalDate dataInicio;
 	@DateTimeFormat(iso = ISO.DATE)
 	private LocalDate dataTermino;
-	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.PERSIST)
+	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL, orphanRemoval = true)
 	private List<Voluntario> voluntarios;
 
-	public long getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

@@ -6,21 +6,24 @@
 		<div class="container-fluid" style="margin-top: 70px;">
 			<div class="row">
 			
-				<div class="col-md-offset-2 col-md-6">
-					<form class="form-inline" action="listarPorFiltro" method="get" >
-						<div class="form-group">
-							<input type="text" class="form-control" id="filtro" name="filtro" placeholder="Filtro" />
-							<button type="submit" class="btn btn-success" th:text="#{botao.buscar}"></button>
+<!-- 				<div class="col-md-offset-2 col-md-6"> -->
+<!-- 					<form class="form-inline" action="listarPorFiltro" method="get" > -->
+<!-- 						<div class="form-group"> -->
+<!-- 							<input type="text" class="form-control" id="filtro" name="filtro" placeholder="Filtro" /> -->
+<!-- 							<button type="submit" class="btn btn-success" th:text="#{botao.buscar}"></button> -->
 							
-							<label class="radio-inline"><input type="radio" name="tipoFiltro" value="1" th:text="#{filtro.nome}" checked="checked"/></label>
-						</div>
-					</form>
+<!-- 							<label class="radio-inline"><input type="radio" name="tipoFiltro" value="1" th:text="#{filtro.nome}" checked="checked"/></label> -->
+<!-- 						</div> -->
+<!-- 					</form> -->
+<!-- 				</div> -->
+				<div class="col-md-offset-2 col-md-3">
+					<input type="search" oninput="w3.filterHTML('#tabelaVoluntarios', '.voluntarios', this.value)" class="form-control" id="filtro" name="filtro" placeholder="Filtro" />
 				</div>
 				
 				<br></br><br></br><br></br>
 				
 				<div class="col-md-offset-2 col-md-6">
-				    <table class="table table-hover">
+				    <table id="tabelaVoluntarios" class="table table-hover">
 				        <thead>
 				        <tr>
 				            <th><span th:text="#{voluntario.nome}" ></span></th>
@@ -28,10 +31,19 @@
 				            <th><span th:text="#{voluntario.telefone}" ></span></th>
 				        </tr>
 				        </thead>
-				        <tr th:each="voluntario : ${voluntarios}">
+				        <tr th:each="voluntario : ${voluntarios}" class="voluntarios">
 				            <td> <span th:text="${voluntario.nome}"></span> </td>
 				            <td> <span th:text="${voluntario.email}"></span> </td>
 				            <td> <span th:text="${voluntario.telefone}"></span> </td>
+				            <td th:if="${inclusao} == null"> 
+				            	<a class="btn btn-primary" th:href="@{/voluntario/editar/{id}(id=${voluntario.id})}" th:text="#{botao.editar}"></a> 
+				            </td>
+				            <td th:if="${inclusao} == null"> 
+								<a class="btn btn-danger" th:href="@{/voluntario/excluir/{id}(id=${voluntario.id})}" th:text="#{botao.remover}"></a>
+				            </td>
+				            <td th:if="${inclusao} != null"> 
+				            	<button type="submit" class="btn btn-success" th:text="#{botao.cadastrar}" th:onclick="'adicionarVoluntario(' + ${projetoId} + ','+ ${voluntario.id} +')'" ></button> 
+				            </td>
 				        </tr>
 				    </table>
 				</div>

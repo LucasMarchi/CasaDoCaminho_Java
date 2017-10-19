@@ -29,15 +29,18 @@
 				            <th></th>
 				            <th></th>
 				            <th></th>
+				            <th></th>
 				        </tr>
 				        </thead>
 				        <tr th:each="projeto : ${projetos}">
 				            <td><span th:text="${projeto.nome}"></span></td>
 				            <td><span th:text="${projeto.dataInicio}"></span></td>
 				            <td><span th:text="${projeto.dataTermino}"></span></td>
-				            <td><button type="submit" class="btn btn-primary" th:text="#{botao.voluntarios}"></button></td>
+				            <td><a class="btn btn-primary" th:href="@{/projeto/visualisar/{id}/voluntario(id=${projeto.id})}" th:text="#{botao.mais}"></a></td>
+				            <td><a class="btn btn-primary" th:href="@{/projeto/visualisar/{id}(id=${projeto.id})}" th:text="#{botao.mais}"></a></td>
 				            <td><button type="submit" class="btn btn-success" th:text="#{botao.editar}"></button></td>
 				            <td><button type="submit" class="btn btn-danger" th:text="#{botao.remover}"></button></td>
+				            
 				        </tr>
 				    </table>
 				</div>

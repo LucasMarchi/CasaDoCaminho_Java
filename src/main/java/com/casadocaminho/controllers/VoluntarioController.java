@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -30,7 +31,7 @@ public class VoluntarioController {
 	@RequestMapping("/cadastrar")
 	public ModelAndView cadastrar(Voluntario voluntario) {
 		voluntarioRepository.save(voluntario);
-		return new ModelAndView("redirect:voluntario/buscar");
+		return new ModelAndView("redirect:listar");
 	}
 	
 	@RequestMapping(value="/listar", method=RequestMethod.GET)
@@ -50,6 +51,22 @@ public class VoluntarioController {
 		}
 
 		logger.info("Retornando lista_voluntarios por filtro");
+		return mv;
+	}
+	
+	@RequestMapping("/editar/{id}")
+	public ModelAndView editar(@PathVariable("id") Integer id) {
+		ModelAndView mv = new ModelAndView("/voluntario/lista_voluntarios");
+		mv.addObject("inclusao", true);
+		mv.addObject("projetoId", id);
+		mv.addObject("voluntarios", voluntarioRepository.findAll());
+		return mv;
+	}
+	
+	@RequestMapping("/excluir/{id}")
+	public ModelAndView excluir(@PathVariable("id") Integer id) {
+		voluntarioRepository.delete(id);
+		ModelAndView mv = new ModelAndView("redirect:voluntario/listar");
 		return mv;
 	}
 	
