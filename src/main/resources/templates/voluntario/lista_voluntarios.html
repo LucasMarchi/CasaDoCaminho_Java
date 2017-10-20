@@ -35,14 +35,14 @@
 				            <td> <span th:text="${voluntario.nome}"></span> </td>
 				            <td> <span th:text="${voluntario.email}"></span> </td>
 				            <td> <span th:text="${voluntario.telefone}"></span> </td>
-				            <td th:if="${inclusao} == null"> 
+				            <td th:if="${inclusao} == null and ${visualizacao} == null"> 
 				            	<a class="btn btn-primary" th:href="@{/voluntario/editar/{id}(id=${voluntario.id})}" th:text="#{botao.editar}"></a> 
 				            </td>
 				            <td th:if="${inclusao} == null"> 
-								<a class="btn btn-danger" th:href="@{/voluntario/excluir/{id}(id=${voluntario.id})}" th:text="#{botao.remover}"></a>
+								<a class="btn btn-danger" th:href="${visualizacao}? @{/projeto/excluir/{id}/voluntario(id=${voluntario.id})} : @{/voluntario/excluir/{id}(id=${voluntario.id})}" th:text="#{botao.remover}"></a>
 				            </td>
 				            <td th:if="${inclusao} != null"> 
-				            	<button type="submit" class="btn btn-success" th:text="#{botao.cadastrar}" th:onclick="'adicionarVoluntario(' + ${projetoId} + ','+ ${voluntario.id} +')'" ></button> 
+				            	<button type="submit" class="btn btn-success" th:text="#{botao.cadastrar}" th:onclick="'registrarVoluntario(' + ${projetoId} + ','+ ${voluntario.id} +')'" ></button> 
 				            </td>
 				        </tr>
 				    </table>

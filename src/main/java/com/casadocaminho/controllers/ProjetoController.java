@@ -43,7 +43,7 @@ public class ProjetoController {
 	public ModelAndView cadastrar(Projeto projeto) {
 		logger.info("Cadastrando projeto");
 		projetoRepository.save(projeto);
-		return new ModelAndView("redirect:projeto/listar");
+		return new ModelAndView("redirect:listar");
 	}
 
 	@RequestMapping(value = "/listar", method = RequestMethod.GET)
@@ -66,25 +66,40 @@ public class ProjetoController {
 		return mv;
 	}
 	
-	@RequestMapping("/visualisar/{id}")
+	@RequestMapping("/visualisar/{id}/voluntario")
 	public ModelAndView visualisarProjeto(@PathVariable("id") Integer id) {
-		ModelAndView mv = new ModelAndView("/projeto/inclusao_voluntario");
+		//Mostra os voluntarios registrados no projeto
+		ModelAndView mv = new ModelAndView("voluntario/lista_voluntarios");
+		mv.addObject("visualizacao", true);
 		mv.addObject("projetoId", id);
 		mv.addObject("voluntarios", voluntarioRepository.findByProjetoId(id));
 		return mv;
 	}
 
-	@RequestMapping("/visualisar/{id}/voluntario")
+	@RequestMapping("/adicionar/{id}/voluntario")
 	public ModelAndView visualisarVoluntarios(@PathVariable("id") Integer id) {
-		ModelAndView mv = new ModelAndView("/voluntario/lista_voluntarios");
+		//Busca voluntarios pra registrar no projeto
+		ModelAndView mv = new ModelAndView("voluntario/lista_voluntarios");
 		mv.addObject("inclusao", true);
 		mv.addObject("projetoId", id);
 		mv.addObject("voluntarios", voluntarioRepository.findAll());
 		return mv;
 	}
 	
-	@RequestMapping("/adicionar/voluntario")
+	@RequestMapping("/excluir/{id}/voluntario")
+	public ModelAndView excluirVoluntarios(@PathVariable("id") Integer id) {
+		//Remove voluntario do projeto
+		projetoRepository.deleteVoluntarioFromProjeto(id);
+		ModelAndView mv = new ModelAndView("redirect:voluntario/lista_voluntarios");
+		mv.addObject("inclusao", true);
+		mv.addObject("projetoId", id);
+		mv.addObject("voluntarios", voluntarioRepository.findAll());
+		return mv;
+	}
+	
+	@RequestMapping("/registrar/voluntario")
 	public ResponseEntity<Object> adicionarVoluntario(@RequestParam Integer idProjeto, @RequestParam Integer idVoluntario) {
+		//Registra voluntario ao projeto
 		List<Voluntario> voluntarios = new ArrayList<>();
 		
 		Voluntario voluntario =  voluntarioRepository.findById(idVoluntario);

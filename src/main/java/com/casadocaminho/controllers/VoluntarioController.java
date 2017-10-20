@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.casadocaminho.models.Filtro;
 import com.casadocaminho.models.Voluntario;
+import com.casadocaminho.repositories.ProjetoRepository;
 import com.casadocaminho.repositories.VoluntarioRepository;
 
 @Controller
@@ -22,6 +23,9 @@ public class VoluntarioController {
 	
 	@Autowired
 	private VoluntarioRepository voluntarioRepository;
+	
+	@Autowired
+	private ProjetoRepository projetoRepository;
 	
 	@RequestMapping("/form")
 	public ModelAndView form() {
@@ -56,17 +60,16 @@ public class VoluntarioController {
 	
 	@RequestMapping("/editar/{id}")
 	public ModelAndView editar(@PathVariable("id") Integer id) {
-		ModelAndView mv = new ModelAndView("/voluntario/lista_voluntarios");
-		mv.addObject("inclusao", true);
-		mv.addObject("projetoId", id);
-		mv.addObject("voluntarios", voluntarioRepository.findAll());
+		ModelAndView mv = new ModelAndView("voluntario/form_voluntario");
+		mv.addObject("voluntario", voluntarioRepository.findById(id));
 		return mv;
 	}
 	
 	@RequestMapping("/excluir/{id}")
 	public ModelAndView excluir(@PathVariable("id") Integer id) {
+		projetoRepository.deleteVoluntarioFromProjeto(id);
 		voluntarioRepository.delete(id);
-		ModelAndView mv = new ModelAndView("redirect:voluntario/listar");
+		ModelAndView mv = new ModelAndView("voluntario/listar");
 		return mv;
 	}
 	

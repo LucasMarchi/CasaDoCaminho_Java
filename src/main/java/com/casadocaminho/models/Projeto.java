@@ -24,7 +24,7 @@ public class Projeto {
 	private LocalDate dataInicio;
 	@DateTimeFormat(iso = ISO.DATE)
 	private LocalDate dataTermino;
-	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.PERSIST)
 	private List<Voluntario> voluntarios;
 
 	public Integer getId() {

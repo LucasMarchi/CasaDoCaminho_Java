@@ -1,9 +1,9 @@
 $(document).ready(function(){
 });
 
-var urlAdicionarVoluntario = "/projeto/adicionar/voluntario"
+var urlAdicionarVoluntario = "/projeto/registrar/voluntario"
 
-function adicionarVoluntario(idProjeto, idVolunatrio){
+function registrarVoluntario(idProjeto, idVolunatrio){
 	$.ajax({
 	    type : "GET",
 	    url : urlAdicionarVoluntario,
