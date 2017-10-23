@@ -3,12 +3,16 @@ package com.casadocaminho.controllers;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,6 +24,7 @@ import com.casadocaminho.models.Projeto;
 import com.casadocaminho.models.Voluntario;
 import com.casadocaminho.repositories.ProjetoRepository;
 import com.casadocaminho.repositories.VoluntarioRepository;
+import com.casadocaminho.validators.ProjetoValidation;
 
 @Controller
 @RequestMapping("/projeto")
@@ -32,6 +37,11 @@ public class ProjetoController {
 
 	@Autowired
 	private VoluntarioRepository voluntarioRepository;
+	
+	@InitBinder
+    public void InitBinder(WebDataBinder binder) {
+        binder.addValidators(new ProjetoValidation());
+    }
 
 	@RequestMapping("/form")
 	public ModelAndView form() {
@@ -40,7 +50,7 @@ public class ProjetoController {
 	}
 
 	@RequestMapping("/cadastrar")
-	public ModelAndView cadastrar(Projeto projeto) {
+	public ModelAndView cadastrar(@Valid Projeto projeto) {
 		logger.info("Cadastrando projeto");
 		projetoRepository.save(projeto);
 		return new ModelAndView("redirect:listar");
@@ -90,7 +100,7 @@ public class ProjetoController {
 	public ModelAndView excluirVoluntarios(@PathVariable("id") Integer id) {
 		//Remove voluntario do projeto
 		projetoRepository.deleteVoluntarioFromProjeto(id);
-		ModelAndView mv = new ModelAndView("redirect:voluntario/lista_voluntarios");
+		ModelAndView mv = new ModelAndView("redirect:voluntario/listar");
 		mv.addObject("inclusao", true);
 		mv.addObject("projetoId", id);
 		mv.addObject("voluntarios", voluntarioRepository.findAll());

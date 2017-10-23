@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 
@@ -19,6 +20,7 @@ public class Projeto {
 	@Id
 	@GeneratedValue
 	private Integer id;
+	@NotEmpty
 	private String nome;
 	@DateTimeFormat(iso = ISO.DATE)
 	private LocalDate dataInicio;

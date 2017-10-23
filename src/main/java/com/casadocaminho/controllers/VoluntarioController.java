@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.casadocaminho.models.Filtro;
 import com.casadocaminho.models.Voluntario;
 import com.casadocaminho.repositories.ProjetoRepository;
 import com.casadocaminho.repositories.VoluntarioRepository;
@@ -18,53 +17,49 @@ import com.casadocaminho.repositories.VoluntarioRepository;
 @Controller
 @RequestMapping("/voluntario")
 public class VoluntarioController {
-	
+
 	private static final Logger logger = LoggerFactory.getLogger(VoluntarioController.class);
-	
+
 	@Autowired
 	private VoluntarioRepository voluntarioRepository;
-	
+
 	@Autowired
 	private ProjetoRepository projetoRepository;
-	
+
 	@RequestMapping("/form")
 	public ModelAndView form() {
 		return new ModelAndView("voluntario/form_voluntario");
 	}
-	
+
 	@RequestMapping("/cadastrar")
 	public ModelAndView cadastrar(Voluntario voluntario) {
 		voluntarioRepository.save(voluntario);
 		return new ModelAndView("redirect:listar");
 	}
-	
-	@RequestMapping(value="/listar", method=RequestMethod.GET)
+
+	@RequestMapping(value = "/listar", method = RequestMethod.GET)
 	public ModelAndView listar() {
 		ModelAndView mv = new ModelAndView("voluntario/lista_voluntarios");
 		mv.addObject("voluntarios", voluntarioRepository.findAll());
 		logger.info("Retornando lista_voluntarios por filtro");
 		return mv;
 	}
-	
-	@RequestMapping(value="/listarPorFiltro", method=RequestMethod.GET)
-	public ModelAndView listarPorFiltro(@RequestParam String filtro, @RequestParam Integer tipoFiltro) {
-		ModelAndView mv = new ModelAndView("voluntario/lista_voluntarios");
-		
-		if(tipoFiltro.equals(Filtro.NOME.getValor())) {
-			mv.addObject("voluntarios", voluntarioRepository.findByNome(filtro));
-		}
 
+	@RequestMapping(value = "/listarPorProjeto", method = RequestMethod.GET)
+	public ModelAndView listarPorFiltro(@RequestParam String filtroProjeto) {
+		ModelAndView mv = new ModelAndView("voluntario/lista_voluntarios");
+		mv.addObject("voluntarios", voluntarioRepository.findByProjetoNome(filtroProjeto));
 		logger.info("Retornando lista_voluntarios por filtro");
 		return mv;
 	}
-	
+
 	@RequestMapping("/editar/{id}")
 	public ModelAndView editar(@PathVariable("id") Integer id) {
 		ModelAndView mv = new ModelAndView("voluntario/form_voluntario");
 		mv.addObject("voluntario", voluntarioRepository.findById(id));
 		return mv;
 	}
-	
+
 	@RequestMapping("/excluir/{id}")
 	public ModelAndView excluir(@PathVariable("id") Integer id) {
 		projetoRepository.deleteVoluntarioFromProjeto(id);
@@ -72,5 +67,5 @@ public class VoluntarioController {
 		ModelAndView mv = new ModelAndView("voluntario/listar");
 		return mv;
 	}
-	
+
 }
