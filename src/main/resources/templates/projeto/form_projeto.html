@@ -1,22 +1,23 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/head :: head(voluntarios)"></head>
+<head th:replace="fragments/head :: head(projetos)"></head>
 	<body>
 		<header th:replace="fragments/cabecalho :: cabecalho"></header>
 			<div class="container-fluid" style="margin-top: 70px;">
 				<div class="row">
 					<div class="col-md-offset-2 col-md-6">
-						<form action="cadastrar" method="post">
+						<form th:action="@{/projeto/cadastrar}" th:object="${projeto}" method="post">
 							<div class="form-group">
 								<label for="nome" th:text="#{projeto.nome}"></label> 
-								<input type="text" class="form-control" id="nome" name="nome" placeholder="Nome" />
+								<input type="text" class="form-control" id="nome" name="nome"  th:field="*{nome}" placeholder="Nome" />
+								<p th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}">Name Error</p>
 							</div>
 							<div class="form-group">
 								<label for="dataInicio" th:text="#{projeto.data.inicio}"></label> 
 								<input type="date" pattern="dd/MM/yyyy" class="form-control" id="dataInicio" name="dataInicio" />
 							</div>
 							<div class="form-group">
-								<label for="dataTermino" th:text="#{projeto.data.termino}"></label> 
+								<label for="dataTermino" th:text="#{beneficiario.data.nascimento}"></label> 
 								<input type="date" pattern="dd/MM/yyyy" class="form-control" id="dataTermino" name="dataTermino" />
 							</div>
 							<button type="submit" class="btn btn-success" th:text="#{botao.cadastrar}"></button>

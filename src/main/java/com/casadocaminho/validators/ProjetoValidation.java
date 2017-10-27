@@ -16,12 +16,13 @@ public class ProjetoValidation implements Validator {
 	@Override
 	 public void validate(Object target, Errors errors) {
 		
-		ValidationUtils.rejectIfEmpty(errors, "dataInicio", "field.required");
+		ValidationUtils.rejectIfEmpty(errors, "nome", "field.required");
+        ValidationUtils.rejectIfEmpty(errors, "dataInicio", "field.required");
         ValidationUtils.rejectIfEmpty(errors, "dataTermino", "field.required");
 		
 		Projeto projeto = (Projeto) target;
 		if (projeto.getDataInicio() != null && projeto.getDataTermino() != null && projeto.getDataInicio().isAfter(projeto.getDataTermino())) {
-            errors.rejectValue("datas", "field.required");
+            errors.rejectValue("dataInicio", "field.required");
         }
     }
 

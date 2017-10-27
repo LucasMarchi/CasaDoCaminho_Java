@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head :: head(voluntarios)"></head>
+	<body>
+		<header th:replace="fragments/cabecalho :: cabecalho"></header>
+		<div class="container-fluid" style="margin-top: 70px;">
+			<div class="row">
+			
+				<!--  <div class="col-md-offset-2 col-md-6">
+					<form class="form-inline" action="listarPorProjeto" method="get" >
+						<div class="form-group">
+							<input type="text" class="form-control" id="filtroProjeto" name="filtroProjeto" placeholder="Projeto" />
+							<button type="submit" class="btn btn-success" th:text="#{botao.buscar}"></button>
+						</div>
+					</form>
+				</div>
+				
+				<br></br><br></br>-->
+				
+				<div class="col-md-offset-2 col-md-3">
+					<input type="search" oninput="w3.filterHTML('#tabelaBeneficiarios', 'beneficiarios', this.value)" class="form-control" id="filtro" name="filtro" placeholder="Filtro" />
+				</div>
+				
+				<br></br><br></br><br></br>
+				
+				<div class="col-md-offset-2 col-md-6">
+				    <table id="#tabelaBeneficiarios" class="table table-hover">
+				        <thead>
+				        <tr>
+				            <th><span th:text="#{beneficiario.nome}" ></span></th>
+				            <th><span th:text="#{beneficiario.data.nascimento}" ></span></th>
+				        </tr>
+				        </thead>
+				        <tr th:each="beneficiario : ${beneficiarios} " class="beneficiarios">
+				            <td> <span th:text="${beneficiario.nome}"></span> </td>
+				            <td> <span th:text="${beneficiario.dataNascimento}"></span> </td>
+				            <td th:if="${inclusao} == null and ${visualizacao} == null"> 
+				            	<a class="btn btn-primary" th:href="@{/voluntario/editar/{id}(id=${beneficiario.id})}" th:text="#{botao.editar}"></a> 
+				            </td>
+				            <!--  <td th:if="${inclusao} == null"> 
+								<a class="btn btn-danger" th:href="${visualizacao}? @{/projeto/excluir/{id}/beneficiario(id=${beneficiario.id})} : @{/beneficiario/excluir/{id}(id=${beneficiario.id})}" th:text="#{botao.remover}"></a>
+				            </td>
+				            <td th:if="${inclusao} != null"> 
+				            	<button type="submit" class="btn btn-success" th:text="#{botao.cadastrar}" th:onclick="'registrarbeneficiario(' + ${projetoId} + ','+ ${beneficiario.id} +')'" ></button> 
+				            </td>-->
+				        </tr>
+				    </table>
+				</div>
+			</div>
+		</div>
+		<footer th:replace="fragments/rodape :: rodape"></footer>
+	</body>
+</html>
