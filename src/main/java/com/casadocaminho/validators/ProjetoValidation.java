@@ -21,8 +21,8 @@ public class ProjetoValidation implements Validator {
         ValidationUtils.rejectIfEmpty(errors, "dataTermino", "field.required");
 		
 		Projeto projeto = (Projeto) target;
-		if (projeto.getDataInicio() != null && projeto.getDataTermino() != null && projeto.getDataInicio().isAfter(projeto.getDataTermino())) {
-            errors.rejectValue("dataInicio", "field.required");
+		if (projeto.getDataInicio() != null && projeto.getDataTermino() != null && projeto.getDataTermino().isBefore(projeto.getDataInicio())) {
+            errors.rejectValue("dataTermino", "field.data.maior");
         }
     }
 

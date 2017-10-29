@@ -7,18 +7,20 @@
 				<div class="row">
 					<div class="col-md-offset-2 col-md-6">
 						<form th:action="@{/projeto/cadastrar}" th:object="${projeto}" method="post">
-							<div class="form-group">
+							<div th:class="${#fields.hasErrors('nome')} ? 'form-group has-error has-feedback' : 'form-group'">
 								<label for="nome" th:text="#{projeto.nome}"></label> 
-								<input type="text" class="form-control" id="nome" name="nome"  th:field="*{nome}" placeholder="Nome" />
-								<p th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}">Name Error</p>
+								<input type="text" class="form-control" id="nome" name="nome" th:field="*{nome}" placeholder="Nome" />
+								<p th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}" class="error"></p>
 							</div>
-							<div class="form-group">
+							<div th:class="${#fields.hasErrors('dataInicio')} ? 'form-group has-error has-feedback' : 'form-group'">
 								<label for="dataInicio" th:text="#{projeto.data.inicio}"></label> 
-								<input type="date" pattern="dd/MM/yyyy" class="form-control" id="dataInicio" name="dataInicio" />
+								<input type="date" pattern="dd/MM/yyyy" class="form-control" id="dataInicio" name="dataInicio" th:field="*{dataInicio}" />
+								<p th:if="${#fields.hasErrors('dataInicio')}" th:errors="*{dataInicio}" class="error"></p>
 							</div>
-							<div class="form-group">
-								<label for="dataTermino" th:text="#{beneficiario.data.nascimento}"></label> 
+							<div th:class="${#fields.hasErrors('dataTermino')} ? 'form-group has-error has-feedback' : 'form-group'">
+								<label for="dataTermino" th:text="#{projeto.data.termino}"></label> 
 								<input type="date" pattern="dd/MM/yyyy" class="form-control" id="dataTermino" name="dataTermino" />
+								<p th:if="${#fields.hasErrors('dataTermino')}" th:errors="*{dataTermino}" class="error"></p>
 							</div>
 							<button type="submit" class="btn btn-success" th:text="#{botao.cadastrar}"></button>
 						</form>
