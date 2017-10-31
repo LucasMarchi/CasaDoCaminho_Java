@@ -11,8 +11,6 @@
 						<div class="form-group">
 							<input type="text" class="form-control" id="filtro" name="filtro" placeholder="Filtro" />
 							<button type="submit" class="btn btn-success" th:text="#{botao.buscar}"></button>
-							
-							<label class="radio-inline"><input type="radio" name="tipoFiltro" value="1" th:text="#{filtro.nome}" checked="checked"/></label>
 						</div>
 					</form>
 				</div>
@@ -23,21 +21,38 @@
 				    <table class="table table-hover">
 				        <thead>
 				        <tr>
-				            <th>Nome</th>
-				            <th>Data Início</th>
-				            <th>Data Término</th>
-				            <th></th>
-				            <th></th>
-				            <th></th>
-				            <th></th>
+				            <th><span th:text="#{projeto.nome}"></span></th>
+				            <th><span th:text="#{projeto.data.inicio}"></span></th>
+				            <th><span th:text="#{projeto.data.termino}"></span></th>
+				            <th colspan="4"></th>
 				        </tr>
 				        </thead>
 				        <tr th:each="projeto : ${projetos}">
 				            <td><span th:text="${projeto.nome}"></span></td>
 				            <td><span th:text="${projeto.dataInicio}"></span></td>
 				            <td><span th:text="${projeto.dataTermino}"></span></td>
-				            <td><a class="btn btn-primary" th:href="@{/projeto/adicionar/{id}/voluntario(id=${projeto.id})}" th:text="#{botao.mais}"></a></td>
-				            <td><a class="btn btn-primary" th:href="@{/projeto/visualisar/{id}/voluntario(id=${projeto.id})}" th:text="#{botao.mais}"></a></td>
+				            <td>
+					            <div class="dropdown">
+								  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><span th:text="#{botao.adicionar}"></span>
+								  <span class="caret"></span></button>
+								  <ul class="dropdown-menu">
+								    <li><a th:href="@{/projeto/adicionar/{id}/voluntario(id=${projeto.id})}" th:text="#{voluntario.titulo}"></a></li>
+								    <li><a th:href="@{/projeto/adicionar/{id}/beneficiario(id=${projeto.id})}" th:text="#{beneficiario.titulo}"></a></li>
+								    <li><a th:href="@{/projeto/adicionar/{id}/doador(id=${projeto.id})}" th:text="#{doador.titulo}"></a></li>
+								  </ul>
+								</div>
+				            </td>
+				            <td>
+				            	<div class="dropdown">
+								  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><span th:text="#{botao.visualisar}"></span>
+								  <span class="caret"></span></button>
+								  <ul class="dropdown-menu">
+								    <li><a th:href="@{/projeto/visualisar/{id}/voluntario(id=${projeto.id})}" th:text="#{voluntario.titulo}"></a></li>
+								    <li><a th:href="@{/projeto/visualisar/{id}/voluntario(id=${projeto.id})}" th:text="#{beneficiario.titulo}"></a></li>
+								    <li><a th:href="@{/projeto/visualisar/{id}/voluntario(id=${projeto.id})}" th:text="#{doador.titulo}"></a></li>
+								  </ul>
+								</div>
+				            </td>
 				            <td><button type="submit" class="btn btn-success" th:text="#{botao.editar}"></button></td>
 				            <td><button type="submit" class="btn btn-danger" th:text="#{botao.remover}"></button></td>
 				            
