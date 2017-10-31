@@ -20,7 +20,13 @@
 								class="form-control" id="telefone" name="telefone"
 								placeholder="Telefone" th:value="${voluntario}? ${voluntario.telefone} : '' "/>
 						</div>
-						<button type="submit" class="btn btn-success">Cadastrar</button>
+						<div  class="form-group">
+							<label>Escolha um projeto</label> 
+							<select name="projetos" id="projetos" class="form-control">
+								<option th:each="projeto : ${listaProjetos}" th:text="${projeto.nome}" th:value="${projeto.id}"></option>
+							</select>
+						</div>
+						<button type="submit" class="btn btn-success" id="cadastrarVoluntario" name="cadastrarVoluntario">Cadastrar</button>
 					</form>
 				</div>
 			</div>

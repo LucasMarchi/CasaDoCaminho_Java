@@ -89,7 +89,7 @@ public class ProjetoController {
 		ModelAndView mv = new ModelAndView("voluntario/lista_voluntarios");
 		mv.addObject("visualizacao", true);
 		mv.addObject("projetoId", id);
-		mv.addObject("voluntarios", voluntarioRepository.findByProjetoId(id));
+	//	mv.addObject("voluntarios", voluntarioRepository.findByProjetoId(id));
 		return mv;
 	}
 
@@ -122,7 +122,7 @@ public class ProjetoController {
 		Voluntario voluntario =  voluntarioRepository.findById(idVoluntario);
 		voluntarios.add(voluntario);
 		Projeto projeto = projetoRepository.findById(idProjeto);
-		projeto.setVoluntarios(voluntarios);
+//		projeto.setVoluntarios(voluntarios);
 		
 		projetoRepository.save(projeto);
 		

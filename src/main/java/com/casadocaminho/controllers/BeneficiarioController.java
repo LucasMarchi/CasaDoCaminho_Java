@@ -42,4 +42,9 @@ public class BeneficiarioController {
 		return mv;
 		
 	}
+	
+	@RequestMapping("/editar")
+	public ModelAndView editar() {
+		return new ModelAndView("beneficiario/lista_beneficiario");
+	}
 }

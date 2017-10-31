@@ -32,5 +32,6 @@ public class VoluntarioControllerTest {
         this.mockMvc.perform(get("/voluntario")).andDo(print()).andExpect(status().isOk())
                 .andExpect(view().name("/voluntario/lista_voluntarios"));
     }
+	
 
 }
