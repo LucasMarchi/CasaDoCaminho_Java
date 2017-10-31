@@ -58,6 +58,7 @@ public class VoluntarioController {
 	@RequestMapping("/editar/{id}")
 	public ModelAndView editar(@PathVariable("id") Integer id) {
 		ModelAndView mv = new ModelAndView("voluntario/form_voluntario");
+		mv.addObject("listaProjetos", projetoRepository.findAll());
 		mv.addObject("voluntario", voluntarioRepository.findById(id));
 		return mv;
 	}

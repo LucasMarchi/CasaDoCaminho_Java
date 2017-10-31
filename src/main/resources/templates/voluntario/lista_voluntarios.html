@@ -30,7 +30,6 @@
 				            <th><span th:text="#{voluntario.nome}" ></span></th>
 				            <th><span th:text="#{voluntario.email}" ></span></th>
 				            <th><span th:text="#{voluntario.telefone}" ></span></th>
-				            <th>Projeto</th>
 				        </tr>
 				        </thead>
 				        <tr th:each="voluntario : ${voluntarios}" class="voluntarios">
@@ -38,7 +37,6 @@
 				            <td> <span th:text="${voluntario.email}"></span> </td>
 				            <td> <span th:text="${voluntario.telefone}"></span> </td>
 				            
-				            <td th:each="projeto : ${voluntario.projetos}"> <span th:text="${projeto.nome}"></span> </td>
 				            <td th:if="${inclusao} == null and ${visualizacao} == null"> 
 				            	<a class="btn btn-primary" th:href="@{/voluntario/editar/{id}(id=${voluntario.id})}" th:text="#{botao.editar}"></a> 
 				            </td>
