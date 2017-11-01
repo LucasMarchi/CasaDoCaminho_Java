@@ -42,7 +42,7 @@ public class VoluntarioController {
     }
 
 	@RequestMapping("/form")
-	public ModelAndView form() {
+	public ModelAndView form(Voluntario voluntario) {
 		ModelAndView mv = new ModelAndView("voluntario/form_voluntario");
 		mv.addObject("projetos", projetoRepository.findAll());
 		return mv;
