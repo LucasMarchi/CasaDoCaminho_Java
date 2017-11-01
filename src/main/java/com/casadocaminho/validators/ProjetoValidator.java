@@ -6,7 +6,7 @@ import org.springframework.validation.Validator;
 
 import com.casadocaminho.models.Projeto;
 
-public class ProjetoValidation implements Validator {
+public class ProjetoValidator implements Validator {
 
 	@Override
 	public boolean supports(Class<?> clazz) {

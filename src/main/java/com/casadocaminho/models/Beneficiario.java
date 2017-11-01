@@ -1,17 +1,14 @@
 package com.casadocaminho.models;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 
@@ -24,9 +21,8 @@ public class Beneficiario {
 	private String nome;
 	@DateTimeFormat(iso = ISO.DATE)
 	private LocalDate dataNascimento;
-	@ManyToMany(fetch=FetchType.LAZY, cascade=CascadeType.PERSIST)
-	@LazyCollection(LazyCollectionOption.FALSE)
-	private List<Projeto> projeto;
+	@ManyToMany(mappedBy="beneficiarios")
+	private List<Projeto> projetos;
 	
 	public Integer getId() {
 		return id;
@@ -52,11 +48,13 @@ public class Beneficiario {
 		this.dataNascimento = dataNascimento;
 	}
 
-	public List<Projeto> getProjeto() {
-		return projeto;
+	public List<Projeto> getProjetos() {
+		if(projetos == null) projetos = new ArrayList<Projeto>();
+		return projetos;
 	}
 
-	public void setProjeto(List<Projeto> projeto) {
-		this.projeto = projeto;
+	public void setProjetos(List<Projeto> projetos) {
+		this.projetos = projetos;
 	}
+
 }
