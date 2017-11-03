@@ -6,7 +6,7 @@
 			<div class="container-fluid" style="margin-top: 70px;">
 				<div class="row">
 					<div class="col-md-offset-2 col-md-6">
-						<form th:action="@{/beneficiario/cadastro}" method="post" th:object="${beneficiario}">
+						<form th:action="@{/beneficiario/cadastrar}" method="post" th:object="${beneficiario}">
 							<div class="form-group" >
 								<label for="nome" th:text="#{beneficiario.nome}"></label> 
 								<input type="text" class="form-control" id="nome" name="nome"   placeholder="Nome" />

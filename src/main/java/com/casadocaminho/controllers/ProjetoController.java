@@ -26,7 +26,7 @@ import com.casadocaminho.models.Projeto;
 import com.casadocaminho.models.Voluntario;
 import com.casadocaminho.repositories.ProjetoRepository;
 import com.casadocaminho.repositories.VoluntarioRepository;
-import com.casadocaminho.validators.ProjetoValidation;
+import com.casadocaminho.validators.ProjetoValidator;
 
 @Controller
 @RequestMapping("/projeto")
@@ -42,7 +42,7 @@ public class ProjetoController {
 	
 	@InitBinder
     public void InitBinder(WebDataBinder binder) {
-        binder.addValidators(new ProjetoValidation());
+        binder.addValidators(new ProjetoValidator());
     }
 
 	@RequestMapping("/form")
@@ -84,12 +84,13 @@ public class ProjetoController {
 	}
 	
 	@RequestMapping("/visualisar/{id}/voluntario")
-	public ModelAndView visualisarProjeto(@PathVariable("id") Integer id) {
+	public ModelAndView visualisarProjeto(@PathVariable("id") Integer idProjeto) {
 		//Mostra os voluntarios registrados no projeto
 		ModelAndView mv = new ModelAndView("voluntario/lista_voluntarios");
 		mv.addObject("visualizacao", true);
-		mv.addObject("projetoId", id);
-		mv.addObject("voluntarios", voluntarioRepository.findByProjetoId(id));
+		mv.addObject("projetoId", idProjeto);
+		Projeto projeto = projetoRepository.findById(idProjeto);
+		mv.addObject("voluntarios", projeto.getVoluntarios());
 		return mv;
 	}
 
@@ -122,7 +123,7 @@ public class ProjetoController {
 		Voluntario voluntario =  voluntarioRepository.findById(idVoluntario);
 		voluntarios.add(voluntario);
 		Projeto projeto = projetoRepository.findById(idProjeto);
-		projeto.setVoluntarios(voluntarios);
+//		projeto.setVoluntarios(voluntarios);
 		
 		projetoRepository.save(projeto);
 		

@@ -11,9 +11,9 @@ import com.casadocaminho.models.Projeto;
 
 public interface ProjetoRepository extends CrudRepository<Projeto, Integer>{
 
-	List<Projeto> findByNome(String voluntarioTeste);
+	List<Projeto> findByNome(String nomeVoluntario);
 
-	Projeto findById(Integer idVoluntario);
+	Projeto findById(Integer idProjeto);
 	
 	@Modifying
 	@Transactional

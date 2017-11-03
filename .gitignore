@@ -8,5 +8,6 @@
 *.classpath
 *.prefs
 .settings/org.eclipse.jdt.core.prefs
+src/main/resources/application.properties
 
 src/main/resources/application\.properties

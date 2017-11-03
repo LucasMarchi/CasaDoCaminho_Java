@@ -6,21 +6,36 @@
 		<div class="container-fluid" style="margin-top: 70px;">
 			<div class="row">
 				<div class="col-md-offset-2 col-md-6">
-					<form action="cadastrar" method="post">
-						<div class="form-group">
-							<label for="nome">Nome</label> <input type="text"
-								class="form-control" id="nome" name="nome" placeholder="Nome" th:value="${voluntario}? ${voluntario.nome} : '' "/>
+					<form th:action="@{/voluntario/cadastrar}" th:object="${voluntario}" method="post">
+					
+						<div th:class="${#fields.hasErrors('nome')} ? 'form-group has-error has-feedback' : 'form-group'">
+							<label for="nome" th:text="#{voluntario.nome}"></label> 
+							<input type="text" class="form-control" id="nome" name="nome" th:value="${voluntario}? ${voluntario.nome} : '' " th:field="*{nome}" placeholder="Nome" />
+							<p th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}" class="error"></p>
 						</div>
-						<div class="form-group">
-							<label for="email">E-mail</label> <input type="email"
-								class="form-control" id="email" name="email" placeholder="Email" th:value="${voluntario}? ${voluntario.email} : '' "/>
+						
+						<div th:class="${#fields.hasErrors('email')} ? 'form-group has-error has-feedback' : 'form-group'">
+							<label for="nome" th:text="#{voluntario.email}"></label> 
+							<input type="text" class="form-control" id="email" name="email" th:value="${voluntario}? ${voluntario.email} : '' " th:field="*{email}" placeholder="Email" />
+							<p th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="error"></p>
 						</div>
-						<div class="form-group">
-							<label for="telefone">Telefone</label> <input type="text"
-								class="form-control" id="telefone" name="telefone"
-								placeholder="Telefone" th:value="${voluntario}? ${voluntario.telefone} : '' "/>
+						
+						<div th:class="${#fields.hasErrors('telefone')} ? 'form-group has-error has-feedback' : 'form-group'">
+							<label for="nome" th:text="#{voluntario.telefone}"></label> 
+							<input type="text" class="form-control" id="telefone" name="telefone" th:value="${voluntario}? ${voluntario.telefone} : '' " th:field="*{telefone}" placeholder="Telefone" />
+							<p th:if="${#fields.hasErrors('telefone')}" th:errors="*{telefone}" class="error"></p>
 						</div>
-						<button type="submit" class="btn btn-success">Cadastrar</button>
+						
+						<div class="form-group">
+							<label>Escolha os Projetos</label> 
+							<div th:each="projeto : ${projetos}">
+								<input type="checkbox" name="projetos" id="projetos" th:value="${projeto.id}" />
+								<label class="checkbox-inline" th:text="${projeto.nome}"></label>
+							</div>
+						</div>
+						
+						<button type="submit" class="btn btn-success" th:text="#{botao.cadastrar}"></button>
+						
 					</form>
 				</div>
 			</div>

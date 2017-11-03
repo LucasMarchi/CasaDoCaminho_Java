@@ -16,13 +16,13 @@ public class ProjetoBuilder {
 
 	public ProjetoBuilder novoProjeto(String nome, List<Voluntario> voluntarios) {
 		projeto.setNome(nome);
-		projeto.setVoluntarios(voluntarios);
+		//projeto.setVoluntarios(voluntarios);
 		return this;
 	}
 
 	public ProjetoBuilder novoProjetoPadrao() {
 		projeto.setNome(ConstantesTest.PROJETO_TESTE);
-		projeto.setVoluntarios(new VoluntarioBuilder().novoVoluntarioPadrao().criar(5));
+	//	projeto.setVoluntarios(new VoluntarioBuilder().novoVoluntarioPadrao().criar(5));
 		return this;
 	}
 

@@ -1,17 +1,17 @@
 package com.casadocaminho.models;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 
@@ -26,11 +26,11 @@ public class Projeto {
 	private LocalDate dataInicio;
 	@DateTimeFormat(iso = ISO.DATE)
 	private LocalDate dataTermino;
-	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.PERSIST)
-	@LazyCollection(LazyCollectionOption.FALSE)
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name="projeto_voluntario", joinColumns = {@JoinColumn(name= "id_voluntario")}, inverseJoinColumns = { @JoinColumn(name = "id_projeto") })
 	private List<Voluntario> voluntarios;
-	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.PERSIST)
-	@LazyCollection(LazyCollectionOption.FALSE)
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name="projeto_beneficiario", joinColumns = {@JoinColumn(name= "id_beneficiario")}, inverseJoinColumns = { @JoinColumn(name = "id_projeto") })
 	private List<Beneficiario> beneficiarios;
 
 	public Integer getId() {
@@ -47,8 +47,8 @@ public class Projeto {
 
 	public void setNome(String nome) {
 		this.nome = nome;
-	}
-	
+	}	
+
 	public LocalDate getDataInicio() {
 		return dataInicio;
 	}
@@ -66,6 +66,7 @@ public class Projeto {
 	}
 
 	public List<Voluntario> getVoluntarios() {
+		if(voluntarios == null) voluntarios = new ArrayList<Voluntario>();
 		return voluntarios;
 	}
 
@@ -80,5 +81,5 @@ public class Projeto {
 	public void setBeneficiarios(List<Beneficiario> beneficiarios) {
 		this.beneficiarios = beneficiarios;
 	}
-
+	
 }

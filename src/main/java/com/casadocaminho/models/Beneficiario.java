@@ -1,10 +1,13 @@
 package com.casadocaminho.models;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
@@ -18,6 +21,8 @@ public class Beneficiario {
 	private String nome;
 	@DateTimeFormat(iso = ISO.DATE)
 	private LocalDate dataNascimento;
+	@ManyToMany(mappedBy="beneficiarios")
+	private List<Projeto> projetos;
 	
 	public Integer getId() {
 		return id;
@@ -41,6 +46,15 @@ public class Beneficiario {
 
 	public void setDataNascimento(LocalDate dataNascimento) {
 		this.dataNascimento = dataNascimento;
+	}
+
+	public List<Projeto> getProjetos() {
+		if(projetos == null) projetos = new ArrayList<Projeto>();
+		return projetos;
+	}
+
+	public void setProjetos(List<Projeto> projetos) {
+		this.projetos = projetos;
 	}
 
 }

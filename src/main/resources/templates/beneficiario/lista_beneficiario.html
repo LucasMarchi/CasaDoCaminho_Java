@@ -35,7 +35,7 @@
 				            <td> <span th:text="${beneficiario.nome}"></span> </td>
 				            <td> <span th:text="${beneficiario.dataNascimento}"></span> </td>
 				            <td th:if="${inclusao} == null and ${visualizacao} == null"> 
-				            	<a class="btn btn-primary" th:href="@{/voluntario/editar/{id}(id=${beneficiario.id})}" th:text="#{botao.editar}"></a> 
+				            	<a class="btn btn-primary" th:href="@{/beneficiario/editar/{id}(id=${beneficiario.id})}" th:text="#{botao.editar}"></a> 
 				            </td>
 				            <!--  <td th:if="${inclusao} == null"> 
 								<a class="btn btn-danger" th:href="${visualizacao}? @{/projeto/excluir/{id}/beneficiario(id=${beneficiario.id})} : @{/beneficiario/excluir/{id}(id=${beneficiario.id})}" th:text="#{botao.remover}"></a>

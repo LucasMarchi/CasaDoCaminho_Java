@@ -16,3 +16,10 @@ function registrarVoluntario(idProjeto, idVolunatrio){
 	    }
 	});
 }
+
+/*function selectProjetos() {
+	$("#cadastrarVoluntario").click(function {
+		var projetoSelecionado = $("#projetoSelecionado option:selected").val();
+		$('input[name="projetoHidden"]').val(projetoSelecionado);
+	});
+}*/
