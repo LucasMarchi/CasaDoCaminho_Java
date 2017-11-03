@@ -50,11 +50,17 @@ public class VoluntarioController {
 
 	@RequestMapping("/cadastrar")
 	public ModelAndView cadastrar(@Valid @ModelAttribute Voluntario voluntario, BindingResult bindingResult) {
-		if (bindingResult.hasErrors()) return new ModelAndView("voluntario/form_voluntario");
+		ModelAndView mv;
+		if (bindingResult.hasErrors()) {
+			mv = new ModelAndView("voluntario/form_voluntario"); 
+			mv.addObject("projetos", projetoRepository.findAll());
+			return mv;
+		}
 		voluntarioRepository.save(voluntario);
 		List<Projeto> projetos = voluntario.getProjetos();
 		if(!projetos.isEmpty()) adicionarEmProjetos(voluntario, projetos);
-		return new ModelAndView("redirect:listar");
+		mv = new ModelAndView("redirect:listar");
+		return mv;
 	}
 
 	@RequestMapping(value = "/listar", method = RequestMethod.GET)
