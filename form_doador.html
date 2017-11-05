@@ -1,47 +1,48 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>ListaVIP</title>
-<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" />
-</head>
-<body>
-	<div class="container">
-		<div id="cadastroVoluntario">
-			<form action="cadastrar" method="post">
-				
-				<div class="form-group">
-				  <input type="radio" name="tipoDoador" value="1"> Pessoa Física<br>
-				  <input type="radio" name="tipoDoador" value="2"> Pessoa Jurídica<br>
-				</form>
-			
-				<div class="form-group">
-					<label for="nome">Nome</label> <input type="text"
-						class="form-control" id="nome" name="nome" placeholder="Nome" />
+<head th:replace="fragments/head :: head(doadores)"></head>
+	<body>
+		<nav th:replace="fragments/cabecalho :: cabecalho"></nav>
+		<div class="container-fluid" style="margin-top: 70px;">
+			<div class="row">
+				<div class="col-md-offset-2 col-md-6">
+					<form th:action="@{/doador/cadastrar}" th:object="${doador}" method="post">
+					
+						<div class="form-group">
+							<input type="radio" name="tipoDoador" value="1"> Pessoa Física<br>
+							<input type="radio" name="tipoDoador" value="2"> Pessoa Jurídica<br>
+						</div>
+					
+						<div th:class="${#fields.hasErrors('nome')} ? 'form-group has-error has-feedback' : 'form-group'">
+							<label for="nome" th:text="#{doador.nome}"></label> 
+							<input type="text" class="form-control" id="nome" name="nome" th:value="${doador}? ${doador.nome} : '' " th:field="*{nome}" placeholder="Nome" />
+							<p th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}" class="error"></p>
+						</div>
+						
+						<div th:class="${#fields.hasErrors('documentoIdentificador')} ? 'form-group has-error has-feedback' : 'form-group'">
+							<label for="documentoIdentificador" th:text="#{doador.documentoIdentificador}"></label> 
+							<input type="text" class="form-control" id="nome" name="nome" th:value="${doador}? ${doador.documentoIdentificador} : '' " th:field="*{documentoIdentificador}" placeholder="CPF ou CNPJ" />
+							<p th:if="${#fields.hasErrors('documentoIdentificador')}" th:errors="*{documentoIdentificador}" class="error"></p>
+						</div>
+						
+						<div th:class="${#fields.hasErrors('email')} ? 'form-group has-error has-feedback' : 'form-group'">
+							<label for="nome" th:text="#{doador.email}"></label> 
+							<input type="text" class="form-control" id="email" name="email" th:value="${doador}? ${doador.email} : '' " th:field="*{email}" placeholder="Email" />
+							<p th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="error"></p>
+						</div>
+						
+						<div th:class="${#fields.hasErrors('telefone')} ? 'form-group has-error has-feedback' : 'form-group'">
+							<label for="nome" th:text="#{doador.telefone}"></label> 
+							<input type="text" class="form-control" id="telefone" name="telefone" th:value="${doador}? ${doador.telefone} : '' " th:field="*{telefone}" placeholder="Telefone" />
+							<p th:if="${#fields.hasErrors('telefone')}" th:errors="*{telefone}" class="error"></p>
+						</div>
+						
+						<button type="submit" class="btn btn-success" th:text="#{botao.cadastrar}"></button>
+						
+					</form>
 				</div>
-				
-				<div class="form-group">
-					<label for="email">CNPJ ou CPF:</label> <input type="documentoIdentificador"
-						class="form-control" id="documentoIdentificador" name="documentoIdentificador" placeholder="CNPJ ou CPF" />
-				</div>
-				
-				
-				<div class="form-group">
-					<label for="email">E-mail</label> <input type="email"
-						class="form-control" id="email" name="email" placeholder="Email" />
-				</div>
-				<div class="form-group">
-					<label for="telefone">Telefone</label> <input type="text"
-						class="form-control" id="telefone" name="telefone"
-						placeholder="Telefone" />
-				</div>
-				
-				<button type="submit" class="btn-success">Cadastrar</button>
-			</form>
+			</div>
 		</div>
-	</div>
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-	<script src="bootstrap/js/bootstrap.min.js"></script>
-</body>
+		<footer th:replace="fragments/rodape :: rodape"></footer>
+	</body>
 </html>
