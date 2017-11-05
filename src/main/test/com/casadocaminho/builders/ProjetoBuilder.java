@@ -1,5 +1,7 @@
 package com.casadocaminho.builders;
 
+import java.time.LocalDate;
+import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +24,9 @@ public class ProjetoBuilder {
 
 	public ProjetoBuilder novoProjetoPadrao() {
 		projeto.setNome(ConstantesTest.PROJETO_TESTE);
-	//	projeto.setVoluntarios(new VoluntarioBuilder().novoVoluntarioPadrao().criar(5));
+		projeto.setDataInicio(LocalDate.of(1969, Month.MAY, 25));
+		projeto.setDataTermino(LocalDate.now());
+		projeto.setVoluntarios(new VoluntarioBuilder().novoVoluntarioPadrao().criar(5));
 		return this;
 	}
 
