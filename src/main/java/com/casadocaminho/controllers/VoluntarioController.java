@@ -7,6 +7,8 @@ import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
@@ -25,10 +27,10 @@ import com.casadocaminho.repositories.VoluntarioRepository;
 import com.casadocaminho.validators.VoluntarioValidator;
 
 @Controller
-@RequestMapping("/voluntario")
+@RequestMapping("voluntario")
 public class VoluntarioController {
 
-	private static final Logger logger = LoggerFactory.getLogger(VoluntarioController.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(VoluntarioController.class);
 
 	@Autowired
 	private VoluntarioRepository voluntarioRepository;
@@ -41,45 +43,53 @@ public class VoluntarioController {
         binder.addValidators(new VoluntarioValidator());
     }
 
-	@RequestMapping("/form")
+	@RequestMapping("form")
 	public ModelAndView form(Voluntario voluntario) {
 		ModelAndView mv = new ModelAndView("voluntario/form_voluntario");
 		mv.addObject("projetos", projetoRepository.findAll());
+		LOGGER.info("Retornando form_voluntario");
 		return mv;
 	}
 
-	@RequestMapping("/cadastrar")
+	@RequestMapping("cadastrar")
+	@CacheEvict(value = "listarVoluntarios", allEntries = true)
 	public ModelAndView cadastrar(@Valid @ModelAttribute Voluntario voluntario, BindingResult bindingResult) {
 		ModelAndView mv;
 		if (bindingResult.hasErrors()) {
 			mv = new ModelAndView("voluntario/form_voluntario"); 
 			mv.addObject("projetos", projetoRepository.findAll());
+			LOGGER.error("Dados do voluntario inválidos");
+			LOGGER.info("Retornando form_voluntario");
 			return mv;
 		}
 		voluntarioRepository.save(voluntario);
 		List<Projeto> projetos = voluntario.getProjetos();
 		if(!projetos.isEmpty()) adicionarEmProjetos(voluntario, projetos);
+		LOGGER.info("Voluntario cadastrado com sucesso");
 		mv = new ModelAndView("redirect:listar");
+		LOGGER.info("Retornando lista_voluntarios");
 		return mv;
 	}
 
-	@RequestMapping(value = "/listar", method = RequestMethod.GET)
+	@RequestMapping(value = "listar", method = RequestMethod.GET)
+	@Cacheable("listarVoluntarios")
 	public ModelAndView listar() {
 		ModelAndView mv = new ModelAndView("voluntario/lista_voluntarios");
 		mv.addObject("voluntarios", voluntarioRepository.findAll());
-		logger.info("Retornando lista_voluntarios");
+		LOGGER.info("Retornando lista_voluntarios");
 		return mv;
 	}
 
-	@RequestMapping(value = "/listarPorProjeto", method = RequestMethod.GET)
+	@RequestMapping(value = "listarPorProjeto", method = RequestMethod.GET)
 	public ModelAndView listarPorFiltro(@RequestParam String filtroProjeto) {
 		ModelAndView mv = new ModelAndView("voluntario/lista_voluntarios");
 //		mv.addObject("voluntarios", voluntarioRepository.findByProjetoNome(filtroProjeto));
-		logger.info("Retornando lista_voluntarios por filtro");
+		LOGGER.info("Retornando lista_voluntarios por filtro");
 		return mv;
 	}
 
-	@RequestMapping("/editar/{id}")
+	@RequestMapping("editar/{id}")
+	@CacheEvict(value = "listarVoluntarios", allEntries = true)
 	public ModelAndView editar(@PathVariable("id") Integer id) {
 		ModelAndView mv = new ModelAndView("voluntario/form_voluntario");
 		mv.addObject("listaProjetos", projetoRepository.findAll());
@@ -87,11 +97,14 @@ public class VoluntarioController {
 		return mv;
 	}
 
-	@RequestMapping("/excluir/{id}")
+	@RequestMapping("excluir/{id}")
+	@CacheEvict(value = "listarVoluntarios", allEntries = true)
 	public ModelAndView excluir(@PathVariable("id") Integer id) {
 		projetoRepository.deleteVoluntarioFromProjeto(id);
 		voluntarioRepository.delete(id);
-		ModelAndView mv = new ModelAndView("voluntario/listar");
+		LOGGER.info("Voluntario deletado com sucesso");
+		ModelAndView mv = new ModelAndView("redirect:/voluntario/listar");
+		LOGGER.info("Retornando lista_voluntarios");
 		return mv;
 	}
 	

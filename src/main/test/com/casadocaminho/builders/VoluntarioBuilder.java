@@ -20,7 +20,7 @@ public class VoluntarioBuilder {
 	}
 	
 	public VoluntarioBuilder novoVoluntarioPadrao() {
-		voluntario.setNome(ConstantesTest.VOLUNTARIO_TESTE);
+		voluntario.setNome(ConstantesTest.VOLUNTARIO_NOME_TESTE);
 		voluntario.setEmail("teste@teste.com");
 		voluntario.setTelefone("(11)4444-5555");
 		return this;

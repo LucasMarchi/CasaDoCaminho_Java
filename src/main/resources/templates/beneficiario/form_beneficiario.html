@@ -16,6 +16,9 @@
 								<label for="dataNascimento" th:text="#{beneficiario.data.nascimento}"></label> 
 								<input type="date" pattern="dd/MM/yyyy" class="form-control" id="dataNascimento" name="dataNascimento" />
 							</div>
+							
+							<div th:replace="fragments/tabela_projetos :: tabela_projetos"></div>
+							
 							<button type="submit" class="btn btn-success" th:text="#{botao.cadastrar}"></button>
 						</form>
 					</div>

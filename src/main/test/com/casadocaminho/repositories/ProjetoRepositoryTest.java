@@ -6,9 +6,10 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.jdbc.EmbeddedDatabaseConnection;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.casadocaminho.builders.ProjetoBuilder;
@@ -16,8 +17,9 @@ import com.casadocaminho.models.Projeto;
 import com.casadocaminho.utils.ConstantesTest;
 
 @RunWith(SpringRunner.class)
+@ActiveProfiles("teste")
 @DataJpaTest
-@AutoConfigureTestDatabase(replace=Replace.NONE)
+@AutoConfigureTestDatabase(connection = EmbeddedDatabaseConnection.HSQL)
 public class ProjetoRepositoryTest {
 	
 	@Autowired
@@ -42,7 +44,7 @@ public class ProjetoRepositoryTest {
 	public void deveEncontrarProjetoPorNome() {
 		Projeto projeto = new ProjetoBuilder().novoProjetoPadrao().criar();
 		projetoRepository.save(projeto);
-		Projeto projetoEncontrado = projetoRepository.findByNome(ConstantesTest.PROJETO_TESTE).get(0);
+		Projeto projetoEncontrado = projetoRepository.findByNome(ConstantesTest.PROJETO_NOME_TESTE).get(0);
 		Assert.assertEquals(projeto.getNome(), projetoEncontrado.getNome());
 	}
 

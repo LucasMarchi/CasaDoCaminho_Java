@@ -1,0 +1,15 @@
+<div th:fragment="tabela_projetos">
+	<table id="tabelaProjetos" class="table table-hover">
+		<thead>
+			<tr>
+				<th></th>
+				<th><span th:text="#{projeto.titulo}"></span></th>
+			</tr>
+		</thead>
+		<tr th:each="projeto : ${projetos}">
+			<td><input type="checkbox" name="projetos" id="projetos"
+				th:value="${projeto.id}" /></td>
+			<td><span th:text="${projeto.nome}"></span></td>
+		</tr>
+	</table>
+</div>

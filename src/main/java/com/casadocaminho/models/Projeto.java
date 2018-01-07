@@ -27,7 +27,7 @@ public class Projeto {
 	@DateTimeFormat(iso = ISO.DATE)
 	private LocalDate dataTermino;
 	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name="projeto_voluntario", joinColumns = {@JoinColumn(name= "id_voluntario")}, inverseJoinColumns = { @JoinColumn(name = "id_projeto") })
+	@JoinTable(name="projeto_voluntario", joinColumns = {@JoinColumn(name= "id_projeto")}, inverseJoinColumns = { @JoinColumn(name = "id_voluntario") })
 	private List<Voluntario> voluntarios;
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name="projeto_beneficiario", joinColumns = {@JoinColumn(name= "id_beneficiario")}, inverseJoinColumns = { @JoinColumn(name = "id_projeto") })

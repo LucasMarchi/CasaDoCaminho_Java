@@ -8,6 +8,8 @@ import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -29,7 +31,7 @@ import com.casadocaminho.repositories.VoluntarioRepository;
 import com.casadocaminho.validators.ProjetoValidator;
 
 @Controller
-@RequestMapping("/projeto")
+@RequestMapping("projeto")
 public class ProjetoController {
 
 	private static final Logger logger = LoggerFactory.getLogger(ProjetoController.class);
@@ -45,13 +47,14 @@ public class ProjetoController {
         binder.addValidators(new ProjetoValidator());
     }
 
-	@RequestMapping("/form")
+	@RequestMapping("form")
 	public ModelAndView form(Projeto projeto) {
 		logger.info("Retornando form_projeto");
 		return new ModelAndView("projeto/form_projeto");
 	}
 
-	@RequestMapping("/cadastrar")
+	@RequestMapping("cadastrar")
+	@CacheEvict(value = "listarProjetos", allEntries = true)
 	public ModelAndView cadastrar(@Valid @ModelAttribute Projeto projeto, BindingResult bindingResult) {
 		if (bindingResult.hasErrors()) {
             return new ModelAndView("projeto/form_projeto");
@@ -63,7 +66,8 @@ public class ProjetoController {
 		return new ModelAndView("redirect:listar");
 	}
 
-	@RequestMapping(value = "/listar", method = RequestMethod.GET)
+	@RequestMapping(value = "listar", method = RequestMethod.GET)
+	@Cacheable("listarProjetos")
 	public ModelAndView listar() {
 		ModelAndView mv = new ModelAndView("projeto/lista_projetos");
 		mv.addObject("projetos", projetoRepository.findAll());
@@ -71,7 +75,7 @@ public class ProjetoController {
 		return mv;
 	}
 
-	@RequestMapping(value = "/listarPorFiltro", method = RequestMethod.GET)
+	@RequestMapping(value = "listarPorFiltro", method = RequestMethod.GET)
 	public ModelAndView listarPorFiltro(@RequestParam String filtro, @RequestParam Integer tipoFiltro) {
 		ModelAndView mv = new ModelAndView("projeto/lista_projetos");
 
@@ -83,7 +87,7 @@ public class ProjetoController {
 		return mv;
 	}
 	
-	@RequestMapping("/visualisar/{id}/voluntario")
+	@RequestMapping("{id}/visualisar/voluntarios")
 	public ModelAndView visualisarProjeto(@PathVariable("id") Integer idProjeto) {
 		//Mostra os voluntarios registrados no projeto
 		ModelAndView mv = new ModelAndView("voluntario/lista_voluntarios");
@@ -94,7 +98,7 @@ public class ProjetoController {
 		return mv;
 	}
 
-	@RequestMapping("/adicionar/{id}/voluntario")
+	@RequestMapping("{id}/adicionar/voluntarios")
 	public ModelAndView visualisarVoluntarios(@PathVariable("id") Integer id) {
 		//Busca voluntarios pra registrar no projeto
 		ModelAndView mv = new ModelAndView("voluntario/lista_voluntarios");
@@ -104,7 +108,7 @@ public class ProjetoController {
 		return mv;
 	}
 	
-	@RequestMapping("/excluir/{id}/voluntario")
+	@RequestMapping("{id}/excluir/voluntario")
 	public ModelAndView excluirVoluntarios(@PathVariable("id") Integer id) {
 		//Remove voluntario do projeto
 		projetoRepository.deleteVoluntarioFromProjeto(id);
@@ -115,7 +119,7 @@ public class ProjetoController {
 		return mv;
 	}
 	
-	@RequestMapping("/registrar/voluntario")
+	@RequestMapping("registrar/voluntario")
 	public ResponseEntity<Object> adicionarVoluntario(@RequestParam Integer idProjeto, @RequestParam Integer idVoluntario) {
 		//Registra voluntario ao projeto
 		List<Voluntario> voluntarios = new ArrayList<>();

@@ -26,25 +26,13 @@
 							<p th:if="${#fields.hasErrors('telefone')}" th:errors="*{telefone}" class="error"></p>
 						</div>
 						
-						<div>
-						    <table id="tabelaProjetos" class="table table-hover">
-						        <thead>
-						        <tr>
-						        	<th></th>
-						            <th><span th:text="#{projeto.titulo}" ></span></th>
-						        </tr>
-						        </thead>
-						        <tr th:each="projeto : ${projetos}" class="voluntarios">
-						        	<td><input type="checkbox" name="projetos" id="projetos" th:value="${projeto.id}" /></td>
-						            <td><span th:text="${projeto.nome}"></span> </td>
-						        </tr>
-						    </table>
-						</div>
+						<div th:replace="fragments/tabela_projetos :: tabela_projetos"></div>
 						
 						<button type="submit" class="btn btn-success" th:text="#{botao.cadastrar}"></button>
 						
 					</form>
 				</div>
+				
 				<div class="col-md-offset-1 col-md-2 float-rigth">
 				   	<img alt="" th:src="@{/img/voluntario.jpg}" class="img-responsive" />
 				</div>

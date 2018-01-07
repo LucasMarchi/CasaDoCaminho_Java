@@ -5,7 +5,7 @@
 		<header th:replace="fragments/cabecalho :: cabecalho"></header>
 			<div class="container-fluid" style="margin-top: 70px;">
 				<div class="row">
-					<div class="col-md-offset-2 col-md-6">
+					<div class="col-md-offset-1 col-md-6">
 						<form th:action="@{/projeto/cadastrar}" th:object="${projeto}" method="post">
 							<div th:class="${#fields.hasErrors('nome')} ? 'form-group has-error has-feedback' : 'form-group'">
 								<label for="nome" th:text="#{projeto.nome}"></label> 

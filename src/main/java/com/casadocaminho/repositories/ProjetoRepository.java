@@ -17,7 +17,7 @@ public interface ProjetoRepository extends CrudRepository<Projeto, Integer>{
 	
 	@Modifying
 	@Transactional
-	@Query(value="DELETE FROM projeto_voluntarios pv WHERE pv.voluntarios_id = ?1", nativeQuery=true)
+	@Query(value="DELETE FROM projeto_voluntario WHERE id_voluntario = ?1", nativeQuery = true)
 	void deleteVoluntarioFromProjeto(Integer idVoluntario);
 
 }

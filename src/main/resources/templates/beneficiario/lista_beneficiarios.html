@@ -29,20 +29,21 @@
 				        <tr>
 				            <th><span th:text="#{beneficiario.nome}" ></span></th>
 				            <th><span th:text="#{beneficiario.data.nascimento}" ></span></th>
+				            <th></th>
 				        </tr>
 				        </thead>
 				        <tr th:each="beneficiario : ${beneficiarios} " class="beneficiarios">
 				            <td> <span th:text="${beneficiario.nome}"></span> </td>
-				            <td> <span th:text="${beneficiario.dataNascimento}"></span> </td>
+				            <td> <span th:text="${#temporals.format(beneficiario.dataNascimento, 'dd/MM/yyyy')}"></span> </td>
 				            <td th:if="${inclusao} == null and ${visualizacao} == null"> 
 				            	<a class="btn btn-primary" th:href="@{/beneficiario/editar/{id}(id=${beneficiario.id})}" th:text="#{botao.editar}"></a> 
 				            </td>
-				            <!--  <td th:if="${inclusao} == null"> 
+				            <td th:if="${inclusao} == null"> 
 								<a class="btn btn-danger" th:href="${visualizacao}? @{/projeto/excluir/{id}/beneficiario(id=${beneficiario.id})} : @{/beneficiario/excluir/{id}(id=${beneficiario.id})}" th:text="#{botao.remover}"></a>
 				            </td>
 				            <td th:if="${inclusao} != null"> 
 				            	<button type="submit" class="btn btn-success" th:text="#{botao.cadastrar}" th:onclick="'registrarbeneficiario(' + ${projetoId} + ','+ ${beneficiario.id} +')'" ></button> 
-				            </td>-->
+				            </td>
 				        </tr>
 				    </table>
 				</div>

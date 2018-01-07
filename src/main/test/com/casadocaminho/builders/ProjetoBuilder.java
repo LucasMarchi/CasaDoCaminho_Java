@@ -23,8 +23,8 @@ public class ProjetoBuilder {
 	}
 
 	public ProjetoBuilder novoProjetoPadrao() {
-		projeto.setNome(ConstantesTest.PROJETO_TESTE);
-		projeto.setDataInicio(LocalDate.of(1969, Month.MAY, 25));
+		projeto.setNome(ConstantesTest.PROJETO_NOME_TESTE);
+		projeto.setDataInicio(LocalDate.of(2000, Month.JANUARY, 01));
 		projeto.setDataTermino(LocalDate.now());
 		projeto.setVoluntarios(new VoluntarioBuilder().novoVoluntarioPadrao().criar(5));
 		return this;

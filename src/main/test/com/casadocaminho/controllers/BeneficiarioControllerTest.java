@@ -10,33 +10,27 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
-
-import com.casadocaminho.models.Projeto;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-public class ProjetoControllerTest {
-
+public class BeneficiarioControllerTest {
+	
 	@Autowired
-	private MockMvc mockMvc;
-
-	@MockBean
-	private Projeto projeto;
-
+    private MockMvc mockMvc;
+	
 	@Test
-	public void deveRetornarTelaFormulario() throws Exception {
-		this.mockMvc.perform(get("/projeto/form")).andDo(print()).andExpect(status().isOk())
-				.andExpect(view().name("projeto/form_projeto"));
-	}
-
+    public void deveRetornarForm() throws Exception {
+        this.mockMvc.perform(get("/beneficiario/form")).andDo(print()).andExpect(status().isOk())
+                .andExpect(view().name("beneficiario/form_beneficiario"));
+    }
+	
 	@Test
-	public void deveRetornarTelaListagem() throws Exception {
-		this.mockMvc.perform(get("/projeto/listar")).andDo(print()).andExpect(status().isOk())
-				.andExpect(view().name("projeto/lista_projetos"));
-	}
+    public void deveRetornarTelaListagem() throws Exception {
+        this.mockMvc.perform(get("/beneficiario/listar")).andDo(print()).andExpect(status().isOk())
+                .andExpect(view().name("beneficiario/lista_beneficiarios"));
+    }
 
 }

@@ -6,19 +6,12 @@
 		<div class="container-fluid" style="margin-top: 70px;">
 			<div class="row">
 			
-				<div class="col-md-offset-2 col-md-6">
-					<form class="form-inline" action="listarPorFiltro" method="get" >
-						<div class="form-group">
-							<input type="text" class="form-control" id="filtro" name="filtro" placeholder="Filtro" />
-							<button type="submit" class="btn btn-success" th:text="#{botao.buscar}"></button>
-						</div>
-					</form>
+				<div class="col-md-offset-1 col-md-3">
+					<input type="search" oninput="w3.filterHTML('#tabelaProjetos', '.projetos', this.value)" class="form-control" id="filtro" name="filtro" placeholder="Filtro" />
 				</div>
 				
-				<br></br><br></br><br></br>
-				
-				<div class="col-md-offset-2 col-md-6">
-				    <table class="table table-hover">
+				<div class="col-md-offset-1 col-md-10 mt-30">
+				    <table id="tabelaProjetos" class="table table-striped table-hover">
 				        <thead>
 				        <tr>
 				            <th><span th:text="#{projeto.nome}"></span></th>
@@ -27,18 +20,18 @@
 				            <th colspan="4"></th>
 				        </tr>
 				        </thead>
-				        <tr th:each="projeto : ${projetos}">
+				        <tr th:each="projeto : ${projetos}" class="projetos">
 				            <td><span th:text="${projeto.nome}"></span></td>
-				            <td><span th:text="${projeto.dataInicio}"></span></td>
-				            <td><span th:text="${projeto.dataTermino}"></span></td>
+				            <td><span th:text="${#temporals.format(projeto.dataInicio, 'dd/MM/yyyy')}"></span></td>
+				            <td><span th:text="${#temporals.format(projeto.dataTermino, 'dd/MM/yyyy')}"></span></td>
 				            <td>
 					            <div class="dropdown">
 								  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><span th:text="#{botao.adicionar}"></span>
 								  <span class="caret"></span></button>
 								  <ul class="dropdown-menu">
-								    <li><a th:href="@{/projeto/adicionar/{id}/voluntario(id=${projeto.id})}" th:text="#{voluntario.titulo}"></a></li>
-								    <li><a th:href="@{/projeto/adicionar/{id}/beneficiario(id=${projeto.id})}" th:text="#{beneficiario.titulo}"></a></li>
-								    <li><a th:href="@{/projeto/adicionar/{id}/doador(id=${projeto.id})}" th:text="#{doador.titulo}"></a></li>
+								    <li><a th:href="@{/projeto/{id}/adicionar/voluntarios(id=${projeto.id})}" th:text="#{voluntario.titulo}"></a></li>
+								    <li><a th:href="@{/projeto/{id}/adicionar/beneficiario(id=${projeto.id})}" th:text="#{beneficiario.titulo}"></a></li>
+								    <li><a th:href="@{/projeto/{id}/adicionar/doador(id=${projeto.id})}" th:text="#{doador.titulo}"></a></li>
 								  </ul>
 								</div>
 				            </td>
@@ -47,9 +40,9 @@
 								  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><span th:text="#{botao.visualisar}"></span>
 								  <span class="caret"></span></button>
 								  <ul class="dropdown-menu">
-								    <li><a th:href="@{/projeto/visualisar/{id}/voluntario(id=${projeto.id})}" th:text="#{voluntario.titulo}"></a></li>
-								    <li><a th:href="@{/projeto/visualisar/{id}/voluntario(id=${projeto.id})}" th:text="#{beneficiario.titulo}"></a></li>
-								    <li><a th:href="@{/projeto/visualisar/{id}/voluntario(id=${projeto.id})}" th:text="#{doador.titulo}"></a></li>
+								    <li><a th:href="@{/projeto/{id}/visualisar/voluntarios(id=${projeto.id})}" th:text="#{voluntario.titulo}"></a></li>
+								    <li><a th:href="@{/projeto/{id}/visualisar/voluntarios(id=${projeto.id})}" th:text="#{beneficiario.titulo}"></a></li>
+								    <li><a th:href="@{/projeto/{id}/visualisar/voluntarios(id=${projeto.id})}" th:text="#{doador.titulo}"></a></li>
 								  </ul>
 								</div>
 				            </td>
