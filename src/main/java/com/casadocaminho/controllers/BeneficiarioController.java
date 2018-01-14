@@ -35,7 +35,7 @@ public class BeneficiarioController {
 	private ProjetoRepository projetoRepository;
 	
 	@InitBinder
-    public void InitBinder(WebDataBinder binder) {
+    public void initBinder(WebDataBinder binder) {
         binder.addValidators(new BeneficiarioValidator());
     }
 	
@@ -75,9 +75,9 @@ public class BeneficiarioController {
 	}
 	
 	private void adicionarEmProjetos(Beneficiario beneficiario, List<Projeto> projetos) {
-		projetos.forEach(projeto->{
-			projeto.getBeneficiarios().add(beneficiario);
-		});
+		projetos.forEach(projeto->
+			projeto.getBeneficiarios().add(beneficiario)
+		);
 		projetoRepository.save(projetos);
 	}
 }

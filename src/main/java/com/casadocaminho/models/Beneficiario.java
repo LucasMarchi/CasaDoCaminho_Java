@@ -49,7 +49,7 @@ public class Beneficiario {
 	}
 
 	public List<Projeto> getProjetos() {
-		if(projetos == null) projetos = new ArrayList<Projeto>();
+		if(projetos == null) projetos = new ArrayList<>();
 		return projetos;
 	}
 
