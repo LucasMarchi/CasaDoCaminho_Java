@@ -49,11 +49,34 @@ public class VoluntarioRepositoryTest {
 	}
 	
 	@Test
-	public void deveEncontrarVoluntariosComMesmoNome() {
-		List<Voluntario> voluntarios = new VoluntarioBuilder().novoVoluntarioPadrao().criar(2);
+	public void deveEditarDadosDoVoluntario() {
+		List<Voluntario> voluntariosEncontrados = null;
+		Voluntario voluntario = new VoluntarioBuilder().novoVoluntarioPadrao().criar();
+		voluntarioRepository.save(voluntario);
+		
+		voluntariosEncontrados = (List<Voluntario>) voluntarioRepository.findAll();
+		voluntario = voluntariosEncontrados.get(0);
+		voluntario.setNome("Nome do voluntario editado");
+		voluntarioRepository.save(voluntario);
+		
+		voluntariosEncontrados = (List<Voluntario>) voluntarioRepository.findAll();
+		voluntario = voluntariosEncontrados.get(0);
+		
+		Assert.assertEquals("Nome do voluntario editado", voluntario.getNome());
+	}
+	
+	@Test
+	public void deveRemoverVoluntario() {
+		Voluntario voluntarios = new VoluntarioBuilder().novoVoluntarioPadrao().criar();
+		List<Voluntario> voluntariosEncontrados = null;
+		
 		voluntarioRepository.save(voluntarios);
-		List<Voluntario> voluntariosEncontrados = voluntarioRepository.findByNome(ConstantesTest.VOLUNTARIO_NOME_TESTE);
-		Assert.assertEquals(2, voluntariosEncontrados.size());
+		voluntariosEncontrados = (List<Voluntario>) voluntarioRepository.findAll();
+		Assert.assertFalse(voluntariosEncontrados.isEmpty());
+		
+		voluntarioRepository.deleteAll();
+		voluntariosEncontrados = (List<Voluntario>) voluntarioRepository.findAll();
+		Assert.assertTrue(voluntariosEncontrados.isEmpty());
 	}
 	
 //	@Test

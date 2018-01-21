@@ -42,8 +42,21 @@
 							</ul>
 						</li>
 						
+						<li>
+							<form th:action="@{/logout}" method="post">
+								<input type="submit" value="Sign Out" class="mt-10" />
+							</form>
+						</li>
+						
+						<li>
+							<div class="mt-10" style="margin-left: 20px;">
+								<a><span th:inline="text" class="mt-10">Hello [[${#httpServletRequest.remoteUser}]]!</span></a>
+							</div>								
+						</li>
+						
 					</ul>
 				</div>
+				
 			</div>
 		</nav>
 		<!-- fim cabecalho -->
