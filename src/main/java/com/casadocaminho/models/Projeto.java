@@ -66,7 +66,7 @@ public class Projeto {
 	}
 
 	public List<Voluntario> getVoluntarios() {
-		if(voluntarios == null) voluntarios = new ArrayList<Voluntario>();
+		if(voluntarios == null) voluntarios = new ArrayList<>();
 		return voluntarios;
 	}
 

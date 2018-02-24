@@ -39,7 +39,7 @@ public class VoluntarioController {
 	private ProjetoRepository projetoRepository;
 	
 	@InitBinder
-    public void InitBinder(WebDataBinder binder) {
+    public void initBinder(WebDataBinder binder) {
         binder.addValidators(new VoluntarioValidator());
     }
 
@@ -109,9 +109,7 @@ public class VoluntarioController {
 	}
 	
 	private void adicionarEmProjetos(Voluntario voluntario, List<Projeto> projetos) {
-		projetos.forEach(projeto->{
-			projeto.getVoluntarios().add(voluntario);
-		});
+		projetos.forEach(projeto-> projeto.getVoluntarios().add(voluntario));
 		projetoRepository.save(projetos);
 	}
 

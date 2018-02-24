@@ -43,7 +43,7 @@ public class ProjetoController {
 	private VoluntarioRepository voluntarioRepository;
 	
 	@InitBinder
-    public void InitBinder(WebDataBinder binder) {
+    public void initBinder(WebDataBinder binder) {
         binder.addValidators(new ProjetoValidator());
     }
 

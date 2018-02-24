@@ -45,7 +45,7 @@ public class Voluntario {
 		this.telefone = telefone;
 	}
 	public List<Projeto> getProjetos() {
-		if(projetos == null) projetos = new ArrayList<Projeto>();
+		if(projetos == null) projetos = new ArrayList<>();
 		return projetos;
 	}
 	public void setProjetos(List<Projeto> projetos) {

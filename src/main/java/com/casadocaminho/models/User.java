@@ -22,7 +22,7 @@ public class User implements UserDetails {
 	private String username;
 	private String password;
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
-	private List<Role> roles = new ArrayList<Role>();
+	private List<Role> roles = new ArrayList<>();
 
 	public void setAuthorities(List<Role> roles) {
 		this.roles = roles;
