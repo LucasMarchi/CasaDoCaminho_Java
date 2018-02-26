@@ -14,6 +14,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.casadocaminho.builders.ProjetoBuilder;
 import com.casadocaminho.models.Projeto;
+import com.casadocaminho.models.Voluntario;
 import com.casadocaminho.utils.ConstantesTest;
 
 @RunWith(SpringRunner.class)
@@ -46,6 +47,14 @@ public class ProjetoRepositoryTest {
 		projetoRepository.save(projeto);
 		Projeto projetoEncontrado = projetoRepository.findByNome(ConstantesTest.PROJETO_NOME_TESTE).get(0);
 		Assert.assertEquals(projeto.getNome(), projetoEncontrado.getNome());
+	}
+	
+	@Test
+	public void deveListarVoluntariosDoProjeto() {
+		Projeto projeto = new ProjetoBuilder().novoProjetoPadrao().criar();
+		projetoRepository.save(projeto);
+		List<Voluntario> voluntariosEncontrados = projetoRepository.findByNome(ConstantesTest.PROJETO_NOME_TESTE).get(0).getVoluntarios();
+		Assert.assertEquals(5, voluntariosEncontrados.size());
 	}
 
 }

@@ -1,7 +1,6 @@
 package com.casadocaminho.models;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -15,8 +14,10 @@ import javax.persistence.ManyToMany;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 
+import lombok.Data;
+
 @Entity
-public class Projeto {
+public @Data class Projeto {
 
 	@Id
 	@GeneratedValue
@@ -33,53 +34,4 @@ public class Projeto {
 	@JoinTable(name="projeto_beneficiario", joinColumns = {@JoinColumn(name= "id_beneficiario")}, inverseJoinColumns = { @JoinColumn(name = "id_projeto") })
 	private List<Beneficiario> beneficiarios;
 
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}	
-
-	public LocalDate getDataInicio() {
-		return dataInicio;
-	}
-
-	public void setDataInicio(LocalDate dataInicio) {
-		this.dataInicio = dataInicio;
-	}
-
-	public LocalDate getDataTermino() {
-		return dataTermino;
-	}
-
-	public void setDataTermino(LocalDate dataTermino) {
-		this.dataTermino = dataTermino;
-	}
-
-	public List<Voluntario> getVoluntarios() {
-		if(voluntarios == null) voluntarios = new ArrayList<>();
-		return voluntarios;
-	}
-
-	public void setVoluntarios(List<Voluntario> voluntarios) {
-		this.voluntarios = voluntarios;
-	}
-
-	public List<Beneficiario> getBeneficiarios() {
-		return beneficiarios;
-	}
-
-	public void setBeneficiarios(List<Beneficiario> beneficiarios) {
-		this.beneficiarios = beneficiarios;
-	}
-	
 }
